@@ -5,13 +5,20 @@
          version="4.0">
   
   <servlet>
-    <servlet-name>Servlet Demo</servlet-name>
-    <servlet-class>uk.ac.aston.dc3010.dtx.ServletDemo</servlet-class>
+    <servlet-name>Controller</servlet-name>
+    <servlet-class>uk.ac.aston.dc3010.dtx.controller.Controller</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>Servlet Demo</servlet-name>
-    <url-pattern>/Demo</url-pattern>
+    <servlet-name>Controller</servlet-name>
+    <url-pattern>/dtx/*</url-pattern>
   </servlet-mapping>
+
+  <resource-ref>
+    <res-ref-name>jdbc/DTXDatabase</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+    <res-sharing-scope>Shareable</res-sharing-scope>
+  </resource-ref>
 
 </web-app>

@@ -1,0 +1,235 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+    <jsp:element name="html">
+        <jsp:attribute name="lang">EN</jsp:attribute>
+        <jsp:include page="core.jspx"/>
+        <jsp:include page="navigation.jspx"/>
+        <jsp:body>
+            <link href="/resources/css/datepicker.min.css" rel="stylesheet" type="text/css"/>
+            <link href="/resources/css/time-calendar.css" rel="stylesheet" type="text/css"/>
+
+            <script src="/resources/js/datepicker.min.js">
+                <!-- datepicker js -->
+            </script>
+            <script src="/resources/js/datepicker.en.js">
+                <!-- en language -->
+            </script>
+
+            <script>
+                <!-- datepicker -->
+
+                $(document).ready(function () {
+                  var dp = $('#date').datepicker({
+                    autoClose: true,
+                    language: "en",
+                    minView: "months",
+                    view: "years",
+                    dateFormat: "MM yyyy"
+                  }).data('datepicker');
+                  dp.selectDate(new Date());
+
+                  $('#date').text(new Date());
+
+                  $('#datepicker').click(function () {
+                    dp.show();
+                  });
+                });
+            </script>
+
+            <br></br>
+            <title>DTX</title>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="input-group mb-3 col-lg-2">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text">Period</label>
+                        </div>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="MMM/YY" id="date"
+                               disabled="disabled" />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button" id="datepicker"><span class="far fa-calendar-alt"></span></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-8">
+                        <table class="table table-hover table-responsive-md" id="summary-table"><!-- table-sm -->
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">From</th>
+                                    <th scope="col">To</th>
+                                    <th scope="col">Project</th>
+                                    <th scope="col">Task</th>
+                                    <th scope="col">Qty</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Standard Time UK</td>
+                                    <td>2018-01-01</td>
+                                    <td>2018-12-12</td>
+                                    <td>HOL00</td>
+                                    <td>1</td>
+                                    <td>100</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-xl-4">
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="employeeDetails">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        Employee Details
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseOne" class="collapse" aria-labelledby="employeeDetails" data-parent="#accordion">
+                                <div class="card-body">
+                                    <form>
+                                        <fieldset disabled="disabled">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control" value="Karan Thaker"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Employee Number</label>
+                                                <input type="text" class="form-control" value="123456"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Business Unit</label>
+                                                <input type="text" class="form-control" value="GB050APT"/>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="itemDetails">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                        Item Details
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTwo" class="collapse show" aria-labelledby="itemDetails" data-parent="#accordion">
+                                <div class="card-body">
+
+                                    <table id="calendar">
+                                        <tr class="weekdays">
+                                            <th scope="col">M</th>
+                                            <th scope="col">T</th>
+                                            <th scope="col">W</th>
+                                            <th scope="col">T</th>
+                                            <th scope="col">F</th>
+                                            <th scope="col">S</th>
+                                            <th scope="col">S</th>
+                                        </tr>
+
+                                        <tr class="days">
+                                            <td class="day other-month"></td>
+                                            <td class="day other-month"></td>
+                                            <td class="day other-month"></td>
+                                            <td class="day other-month"> </td>
+                                            <td class="day other-month"></td>
+                                            <td class="day">
+                                                <div class="date">1</div>
+                                                <input class="hours" type="text" placeholder="0"></input>
+                                            </td>
+                                            <td class="day"><div class="date">2</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day"><div class="date">3</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">4</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">5</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">6</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">7</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">8</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">9</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day"><div class="date">10</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">11</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">12</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">13</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">14</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">15</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">16</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day"><div class="date">17</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">18</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">19</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">20</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">21</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">22</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">23</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="day"><div class="date">24</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">25</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">26</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">27</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">28</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">29</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                            <td class="day"><div class="date">30</div>
+                                                <input class="hours" type="text" placeholder="0"></input></td>
+                                        </tr>
+                                        <tr>
+
+                                        <td class="day"><div class="date">31</div>
+                                            <input class="hours" type="text" placeholder="0"></input></td>
+                                        <td class="day other-month"></td>
+                                        <td class="day other-month"></td>
+                                        <td class="day other-month"></td>
+                                        <td class="day other-month"></td>
+                                        <td class="day other-month"></td>
+                                        <td class="day other-month"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </jsp:body>
+    </jsp:element>
+</jsp:root>

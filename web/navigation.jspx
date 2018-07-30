@@ -1,0 +1,23 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: Karan
+  Date: 28/07/2018
+  Time: 20:35
+  To change this template use File | Settings | File Templates.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+    <jsp:directive.page contentType="text/html; ISO-8859-1" pageEncoding="utf-8"/>
+    <jsp:body>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="#">
+                <img src="/resources/images/capgemini-logo.png" height="50" class="d-inline-block align-top" alt=""/>
+            </a>
+            <div class="navbar-nav">
+                <h1><b>DTX</b></h1>
+            </div>
+            <form class="form-inline my-2 my-lg-0" action="/dtx/logout">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Sign Out</button>
+            </form>
+        </nav>
+    </jsp:body>
+</jsp:root>
