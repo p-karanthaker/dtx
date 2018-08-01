@@ -10,7 +10,7 @@
     <jsp:body>
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="#">
-                <img src="/resources/images/capgemini-logo.png" height="50" class="d-inline-block align-top" alt=""/>
+                <img src="/resources/images/capgemini-logo.png" height="50" class="d-inline-block align-top" alt="Capgemini Logo"/>
             </a>
             <div class="navbar-nav">
                 <h1><b>DTX</b></h1>
