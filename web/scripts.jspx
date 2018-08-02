@@ -1,0 +1,52 @@
+<!--
+  Created by IntelliJ IDEA.
+  User: Karan
+  Date: 02/08/2018
+  Time: 22:43
+  To change this template use File | Settings | File Templates.
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js">
+      <!-- JQuery -->
+    </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js">
+      <!-- Popper.js -->
+    </script>
+
+    <script type="text/javascript" src="/resources/js/bootstrap.min.js">
+      <!-- Bootstrap -->
+    </script>
+
+    <script type="text/javascript" src="/resources/js/datepicker.min.js">
+      <!-- Date Picker JS -->
+    </script>
+
+    <script type="text/javascript" src="/resources/js/datepicker.en.js">
+      <!-- Date Picker EN Language -->
+    </script>
+
+    <script type="text/javascript" src="/resources/js/dtx.js">
+        <!-- Side Nav -->
+    </script>
+
+    <script>
+      <!-- Date Picker -->
+      $(document).ready(function () {
+        var dp = $('#date').datepicker({
+          autoClose: true,
+          language: "en",
+          minView: "months",
+          view: "years",
+          dateFormat: "MM yyyy"
+        }).data('datepicker');
+        dp.selectDate(new Date());
+
+        $('#date').text(new Date());
+
+        $('#datepicker').click(function () {
+          dp.show();
+        });
+      });
+    </script>
+</jsp:root>
