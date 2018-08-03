@@ -1,15 +1,15 @@
 <!--
   Loads page metadata and CSS pages.
 -->
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"  xmlns="http://www.w3.org/1999/xhtml" version="2.0">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="DTX Webapp" />
-    <meta name="author" content="Prem-Karan Thaker" />
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content="DTX Webapp"/>
+  <meta name="author" content="Prem-Karan Thaker"/>
 
-    <link rel="icon" href="/resources/images/capgemini-spade.png" />
-    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
-    <link rel="stylesheet" type="text/css" href="/resources/css/datepicker.min.css" />
-    <link rel="stylesheet" type="text/css" href="/resources/css/dtx.css" />
+  <link rel="icon" href="/resources/images/capgemini-spade.png"/>
+  <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.css"/>
+  <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"/>
+  <link rel="stylesheet" type="text/css" href="/resources/css/datepicker.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/resources/css/dtx.css"/>
 </jsp:root>

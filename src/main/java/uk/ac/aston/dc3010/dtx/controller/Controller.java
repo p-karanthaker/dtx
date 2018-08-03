@@ -15,17 +15,16 @@ public class Controller extends HttpServlet {
     users = new Users();
   }
 
-  public void destroy() {
+  public void destroy() {}
 
-  }
-
-  protected void processRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void processRequest(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
     final String action = req.getPathInfo();
     final String contextPath = req.getContextPath();
     final String path = contextPath + req.getServletPath();
     session = req.getSession(true);
 
-    switch(action) {
+    switch (action) {
       case "/login":
         final String username = req.getParameter("username");
         final String password = req.getParameter("password");
@@ -47,12 +46,14 @@ public class Controller extends HttpServlet {
   }
 
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
     processRequest(req, resp);
   }
 
   @Override
-  protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+      throws ServletException, IOException {
     processRequest(req, resp);
   }
 }

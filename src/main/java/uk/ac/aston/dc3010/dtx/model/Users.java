@@ -18,13 +18,13 @@ public class Users {
     } catch (Exception e) {
       System.out.println("Exception: " + e.getMessage());
     }
-
   }
 
   public boolean authenticate(String username, String password) {
     try (Connection connection = dataSource.getConnection()) {
       if (connection != null) {
-        final String query = "SELECT username, password FROM employee WHERE username = ? AND password = ?";
+        final String query =
+            "SELECT username, password FROM employee WHERE username = ? AND password = ?";
 
         final PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1, username);
@@ -41,7 +41,6 @@ public class Users {
         if ((user != null && pword != null) && (user.equals(username) && pword.equals(password))) {
           return true;
         }
-
       }
     } catch (SQLException e) {
       System.out.println("Exception: " + e.getMessage());
@@ -49,5 +48,4 @@ public class Users {
 
     return false;
   }
-
 }

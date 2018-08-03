@@ -30,7 +30,8 @@
     <img class="mb-4" src="/resources/images/capgemini-logo.png" alt="" width="200">
     <h1 class="h3 mb-3 font-weight-normal">Sign in to DTX</h1>
     <label for="inputEmail" class="sr-only">CORP Username</label>
-    <input name="username" type="text" id="inputEmail" class="form-control" placeholder="CORP\Username" required autofocus>
+    <input name="username" type="text" id="inputEmail" class="form-control" placeholder="CORP\Username" required
+           autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
     <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>

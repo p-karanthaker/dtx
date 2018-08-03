@@ -1,120 +1,125 @@
 /** Override to Capgemini fonts **/
 @font-face {
-    font-family: Ubuntu;
-    src: url("/resources/fonts/Ubuntu-R.ttf");
+  font-family: Ubuntu;
+  src: url("/resources/fonts/Ubuntu-R.ttf");
 }
 
 html {
-    font-family: "Ubuntu", "Verdana", sans-serif;
+  font-family: "Ubuntu", "Verdana", sans-serif;
 }
 
 body {
-    font-family: "Ubuntu", "Verdana", sans-serif;
+  font-family: "Ubuntu", "Verdana", sans-serif;
 }
 
 /** Capgemini official colours **/
 :root {
-    --primary-blue: #0070ad;
-    --secondary-blue: #12abdb;
+  --primary-blue: #0070ad;
+  --secondary-blue: #12abdb;
 }
 
 /** Time Cards **/
 .card-body {
-    line-height: 1em;
+  line-height: 1em;
 }
 
 .btn-sq-lg {
-    width: 150px !important;
-    height: 150px !important;
+  width: 150px !important;
+  height: 150px !important;
 }
 
 .btn-sq {
-    width: 100px !important;
-    height: 100px !important;
+  width: 100px !important;
+  height: 100px !important;
 }
 
 .btn-sq-sm {
-    width: 50px !important;
-    height: 50px !important;
+  width: 50px !important;
+  height: 50px !important;
 }
 
 .btn-sq-xs {
-    width: 25px !important;
-    height: 25px !important;
-    padding:2px;
+  width: 25px !important;
+  height: 25px !important;
+  padding: 2px;
 }
 
 /** Calendar Grid **/
 
 .box {
-    background-color: var(--primary-blue);
-    color: #fff;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 1em;
+  background-color: var(--primary-blue);
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1em;
 }
 
 .box.other-month {
-    background-color: #ccc;
+  background-color: #ccc;
 }
 
 .box.day {
-    background-color: var(--secondary-blue);
-    text-align: center;
+  background-color: var(--secondary-blue);
+  text-align: center;
 }
 
 .hours {
-    width: 100%;
+  width: 100%;
 }
 
 .wrapper {
-    width: 75%;
-    display: grid;
-    grid-gap: 1px;
-    grid-template-columns: repeat(7, auto);
-    grid-template-rows: 20px repeat(5, auto);
-    grid-auto-flow: row;
+  width: 75%;
+  display: grid;
+  grid-gap: 1px;
+  grid-template-columns: repeat(7, auto);
+  grid-template-rows: 20px repeat(5, auto);
+  grid-auto-flow: row;
 }
 
 /** Side Nav **/
 /* The side navigation menu */
 .sidenav {
-    height: 100%; /* 100% Full-height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
-    right: 0;
-    background-color: #111; /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  right: 0;
+  background-color: #111; /* Black*/
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 60px; /* Place content 60px from the top */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
 /* The navigation menu links */
 .sidenav a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
 }
 
 /* When you mouse over the navigation links, change their color */
 .sidenav a:hover {
-    color: #f1f1f1;
+  color: #f1f1f1;
 }
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
 }
 
 /** Media Queries **/
 @media only screen and (max-width: 640px) {
-    .wrapper {
-        width: 100%;
-    }
+  .wrapper {
+    width: 100%;
+  }
 }

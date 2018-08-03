@@ -1,182 +1,189 @@
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
-    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
-    <jsp:element name="html">
-        <jsp:attribute name="lang">EN</jsp:attribute>
+  <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+  <jsp:element name="html">
+    <jsp:attribute name="lang">EN</jsp:attribute>
 
-        <jsp:element name="head">
-            <title>DTX</title>
+    <jsp:element name="head">
+      <title>DTX</title>
 
-            <!-- Load CSS pages. -->
-            <jsp:include page="core.jspx"/>
-        </jsp:element>
-        <jsp:element name="body">
-            <!-- Navigation -->
-            <header>
-                <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="#">
-                        <img src="/resources/images/capgemini-logo.png" height="50" class="d-inline-block align-top" alt="Capgemini Logo"/>
-                    </a>
-                    <div class="navbar-nav">
-                        <h1><b>DTX</b></h1>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn btn-sq-sm btn-outline-primary my-2 my-sm-0" name="user-btn" aria-label="User Details" type="button" onclick=""><span class="fas fa-user"></span></button>
-                        <button class="btn btn-sq-sm btn-outline-primary my-2 my-sm-0" name="info-btn" aria-label="About" type="button"><span class="fas fa-question"></span></button>
-                        <form class="btn-group" method="post" action="/dtx/logout">
-                            <button class="btn btn-sq-sm btn-outline-primary my-2 my-sm-0" name="sign-out" aria-label="Sign Out" type="submit"><span class="fas fa-sign-out-alt"></span></button>
-                        </form>
-                    </div>
-                </nav>
-            </header>
+      <!-- Load CSS pages. -->
+      <jsp:include page="core.jspx"/>
+    </jsp:element>
+    <jsp:element name="body">
+      <!-- Navigation -->
+      <header>
+        <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand" href="#">
+            <img src="/resources/images/capgemini-logo.png" height="50" class="d-inline-block align-top"
+                 alt="Capgemini Logo"/>
+          </a>
+          <div class="navbar-nav">
+            <h1><b>DTX</b></h1>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-sq-sm btn-outline-primary my-2 my-sm-0" name="user-btn" aria-label="User Details"
+                    type="button" onclick=""><span class="fas fa-user"></span></button>
+            <button class="btn btn-sq-sm btn-outline-primary my-2 my-sm-0" name="info-btn" aria-label="About"
+                    type="button"><span class="fas fa-question"></span></button>
+            <form class="btn-group" method="post" action="/dtx/logout">
+              <button class="btn btn-sq-sm btn-outline-primary my-2 my-sm-0" name="sign-out" aria-label="Sign Out"
+                      type="submit"><span class="fas fa-sign-out-alt"></span></button>
+            </form>
+          </div>
+        </nav>
+      </header>
 
-            <div id="mySidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"></a>
-                <a href="#">About</a>
-                <a href="#">Services</a>
-                <a href="#">Clients</a>
-                <a href="#">Contact</a>
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"></a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <br></br>
+
+      <!-- Main page content. -->
+      <main role="main" class="container-fluid">
+        <div class="row">
+          <div class="col-lg">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text">Period</label>
+              </div>
+              <input type="text"
+                     class="form-control"
+                     placeholder="MMM/YY" id="date"
+                     disabled="disabled"/>
+              <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" id="datepicker"><span
+                    class="far fa-calendar-alt"></span></button>
+              </div>
             </div>
 
-            <br></br>
+            <div class="card mb-2">
+              <div class="card-header py-1">
+                <b><i>#1</i></b> Standard Time UK
+                <span class="badge badge-success float-right">Approved</span>
+              </div>
+              <div class="card-body py-1">
+                <b><i>From: </i></b>2018-01-01 <b><i>To: </i></b> 2018-12-12 <br/>
+                <b><i>Project: </i></b> HOL00 <br/>
+                <b><i>Task: </i></b> 1 <br/>
+                <b><i>Quantity: </i></b> 100 <br/>
+              </div>
+            </div>
+            <div class="card mb-2">
+              <div class="card-header py-1">
+                <b><i>#2</i></b> Standard Time UK
+                <span class="badge badge-warning float-right">Pending Approval</span>
+              </div>
+              <div class="card-body py-1">
+                <b><i>From: </i></b>2018-01-01 <b><i>To: </i></b> 2018-12-12 <br/>
+                <b><i>Project: </i></b> HOL00 <br/>
+                <b><i>Task: </i></b> 1 <br/>
+                <b><i>Quantity: </i></b> 100 <br/>
+              </div>
+            </div>
+          </div>
 
-            <!-- Main page content. -->
-            <main role="main" class="container-fluid">
-                <div class="row">
-                    <div class="col-lg">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">Period</label>
-                            </div>
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="MMM/YY" id="date"
-                                   disabled="disabled" />
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-primary" type="button" id="datepicker"><span class="far fa-calendar-alt"></span></button>
-                            </div>
-                        </div>
-
-                        <div class="card mb-2">
-                            <div class="card-header py-1">
-                                <b><i>#1</i></b> Standard Time UK
-                                <span class="badge badge-success float-right">Approved</span>
-                            </div>
-                            <div class="card-body py-1">
-                                <b><i>From: </i></b>2018-01-01 <b><i>To: </i></b> 2018-12-12 <br/>
-                                <b><i>Project: </i></b> HOL00 <br/>
-                                <b><i>Task: </i></b> 1 <br/>
-                                <b><i>Quantity: </i></b> 100 <br/>
-                            </div>
-                        </div>
-                        <div class="card mb-2">
-                            <div class="card-header py-1">
-                                <b><i>#2</i></b> Standard Time UK
-                                <span class="badge badge-warning float-right">Pending Approval</span>
-                            </div>
-                            <div class="card-body py-1">
-                                <b><i>From: </i></b>2018-01-01 <b><i>To: </i></b> 2018-12-12 <br/>
-                                <b><i>Project: </i></b> HOL00 <br/>
-                                <b><i>Task: </i></b> 1 <br/>
-                                <b><i>Quantity: </i></b> 100 <br/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg">
-                    <div id="accordion">
-                        <div class="card">
-                            <div class="card-header" id="employeeDetails">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        Employee Details
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseOne" class="collapse" aria-labelledby="employeeDetails" data-parent="#accordion">
-                                <div class="card-body">
-                                    <form>
-                                        <fieldset disabled="disabled">
-                                            <div class="form-group">
-                                                <label>Name</label>
-                                                <input type="text" class="form-control" value="Karan Thaker"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Employee Number</label>
-                                                <input type="text" class="form-control" value="123456"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Business Unit</label>
-                                                <input type="text" class="form-control" value="GB050APT"/>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header" id="itemDetails">
-                                <h5 class="mb-0">
-                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                        Item Details
-                                    </button>
-                                </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse show" aria-labelledby="itemDetails" data-parent="#accordion">
-                                <div class="card-body">
-                                    <div class="wrapper">
-                                        <div class="box day">M</div>
-                                        <div class="box day">T</div>
-                                        <div class="box day">W</div>
-                                        <div class="box day">T</div>
-                                        <div class="box day">F</div>
-                                        <div class="box day">S</div>
-                                        <div class="box day">S</div>
-                                        <div class="box other-month">.</div>
-                                        <div class="box">1 <input class="hours"></input></div>
-                                        <div class="box">2 <input class="hours"></input></div>
-                                        <div class="box">3 <input class="hours"></input></div>
-                                        <div class="box">4 <input class="hours"></input></div>
-                                        <div class="box">5 <input class="hours"></input></div>
-                                        <div class="box">6 <input class="hours"></input></div>
-                                        <div class="box">7 <input class="hours"></input></div>
-                                        <div class="box">8 <input class="hours"></input></div>
-                                        <div class="box">9 <input class="hours"></input></div>
-                                        <div class="box">10 <input class="hours"></input></div>
-                                        <div class="box">11<input class="hours"></input></div>
-                                        <div class="box">12<input class="hours"></input></div>
-                                        <div class="box">13<input class="hours"></input></div>
-                                        <div class="box">14<input class="hours"></input></div>
-                                        <div class="box">15<input class="hours"></input></div>
-                                        <div class="box">16<input class="hours"></input></div>
-                                        <div class="box">17<input class="hours"></input></div>
-                                        <div class="box">18<input class="hours"></input></div>
-                                        <div class="box">19<input class="hours"></input></div>
-                                        <div class="box">20<input class="hours"></input></div>
-                                        <div class="box">21<input class="hours"></input></div>
-                                        <div class="box">22<input class="hours"></input></div>
-                                        <div class="box">23<input class="hours"></input></div>
-                                        <div class="box">24<input class="hours"></input></div>
-                                        <div class="box">25<input class="hours"></input></div>
-                                        <div class="box">26<input class="hours"></input></div>
-                                        <div class="box">27<input class="hours"></input></div>
-                                        <div class="box">28<input class="hours"></input></div>
-                                        <div class="box">29<input class="hours"></input></div>
-                                        <div class="box">30<input class="hours"></input></div>
-                                        <div class="box other-month">.</div>
-                                        <div class="box other-month">.</div>
-                                        <div class="box other-month">.</div>
-                                        <div class="box other-month">.</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
+          <div class="col-lg">
+            <div id="accordion">
+              <div class="card">
+                <div class="card-header" id="employeeDetails">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="false" aria-controls="collapseOne">
+                      Employee Details
+                    </button>
+                  </h5>
                 </div>
-            </main>
+                <div id="collapseOne" class="collapse" aria-labelledby="employeeDetails" data-parent="#accordion">
+                  <div class="card-body">
+                    <form>
+                      <fieldset disabled="disabled">
+                        <div class="form-group">
+                          <label>Name</label>
+                          <input type="text" class="form-control" value="Karan Thaker"/>
+                        </div>
+                        <div class="form-group">
+                          <label>Employee Number</label>
+                          <input type="text" class="form-control" value="123456"/>
+                        </div>
+                        <div class="form-group">
+                          <label>Business Unit</label>
+                          <input type="text" class="form-control" value="GB050APT"/>
+                        </div>
+                      </fieldset>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" id="itemDetails">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
+                            aria-controls="collapseTwo">
+                      Item Details
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse show" aria-labelledby="itemDetails" data-parent="#accordion">
+                  <div class="card-body">
+                    <div class="wrapper">
+                      <div class="box day">M</div>
+                      <div class="box day">T</div>
+                      <div class="box day">W</div>
+                      <div class="box day">T</div>
+                      <div class="box day">F</div>
+                      <div class="box day">S</div>
+                      <div class="box day">S</div>
+                      <div class="box other-month">.</div>
+                      <div class="box">1 <input class="hours"></input></div>
+                      <div class="box">2 <input class="hours"></input></div>
+                      <div class="box">3 <input class="hours"></input></div>
+                      <div class="box">4 <input class="hours"></input></div>
+                      <div class="box">5 <input class="hours"></input></div>
+                      <div class="box">6 <input class="hours"></input></div>
+                      <div class="box">7 <input class="hours"></input></div>
+                      <div class="box">8 <input class="hours"></input></div>
+                      <div class="box">9 <input class="hours"></input></div>
+                      <div class="box">10 <input class="hours"></input></div>
+                      <div class="box">11<input class="hours"></input></div>
+                      <div class="box">12<input class="hours"></input></div>
+                      <div class="box">13<input class="hours"></input></div>
+                      <div class="box">14<input class="hours"></input></div>
+                      <div class="box">15<input class="hours"></input></div>
+                      <div class="box">16<input class="hours"></input></div>
+                      <div class="box">17<input class="hours"></input></div>
+                      <div class="box">18<input class="hours"></input></div>
+                      <div class="box">19<input class="hours"></input></div>
+                      <div class="box">20<input class="hours"></input></div>
+                      <div class="box">21<input class="hours"></input></div>
+                      <div class="box">22<input class="hours"></input></div>
+                      <div class="box">23<input class="hours"></input></div>
+                      <div class="box">24<input class="hours"></input></div>
+                      <div class="box">25<input class="hours"></input></div>
+                      <div class="box">26<input class="hours"></input></div>
+                      <div class="box">27<input class="hours"></input></div>
+                      <div class="box">28<input class="hours"></input></div>
+                      <div class="box">29<input class="hours"></input></div>
+                      <div class="box">30<input class="hours"></input></div>
+                      <div class="box other-month">.</div>
+                      <div class="box other-month">.</div>
+                      <div class="box other-month">.</div>
+                      <div class="box other-month">.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
 
-            <!-- Include scripts last to improve page load performance. -->
-            <jsp:include page="scripts.jspx"/>
-        </jsp:element>
+      <!-- Include scripts last to improve page load performance. -->
+      <jsp:include page="scripts.jspx"/>
     </jsp:element>
+  </jsp:element>
 </jsp:root>
