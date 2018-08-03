@@ -8,5 +8,5 @@ function toggleNav() {
 }
 
 document.onclick = function () {
-  toggleNav();
-}
+  //toggleNav();
+};

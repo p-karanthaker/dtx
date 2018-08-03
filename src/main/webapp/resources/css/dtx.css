@@ -5,11 +5,11 @@
 }
 
 html {
-    font-family: "Ubuntu", "Verdana";
+    font-family: "Ubuntu", "Verdana", sans-serif;
 }
 
 body {
-    font-family: "Ubuntu", "Verdana";
+    font-family: "Ubuntu", "Verdana", sans-serif;
 }
 
 /** Capgemini official colours **/
