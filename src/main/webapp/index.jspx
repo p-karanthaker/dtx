@@ -63,26 +63,24 @@
 
             <div class="card mb-2">
               <div class="card-header py-1">
-                <b><i>#1</i></b> Standard Time UK
-                <span class="badge badge-success float-right">Approved</span>
+                Standard Time UK<span class="badge badge-success float-right">Approved</span>
               </div>
               <div class="card-body py-1">
-                <b><i>From: </i></b>2018-01-01 <b><i>To: </i></b> 2018-12-12 <br/>
-                <b><i>Project: </i></b> HOL00 <br/>
-                <b><i>Task: </i></b> 1 <br/>
-                <b><i>Quantity: </i></b> 100 <br/>
+                <b>From: </b>2018-01-01 <b><i>To: </i></b> 2018-12-12 <br/>
+                <b>Project: </b> HOL00 <br/>
+                <b>Task: </b> 1 <br/>
+                <b>Quantity: </b> 100 <br/>
               </div>
             </div>
             <div class="card mb-2">
               <div class="card-header py-1">
-                <b><i>#2</i></b> Standard Time UK
-                <span class="badge badge-warning float-right">Pending Approval</span>
+                Standard Time UK<span class="badge badge-warning float-right">Pending Approval</span>
               </div>
               <div class="card-body py-1">
-                <b><i>From: </i></b>2018-01-01 <b><i>To: </i></b> 2018-12-12 <br/>
-                <b><i>Project: </i></b> HOL00 <br/>
-                <b><i>Task: </i></b> 1 <br/>
-                <b><i>Quantity: </i></b> 100 <br/>
+                <b>From: </b>2018-01-01 <b>To: </b> 2018-12-12 <br/>
+                <b>Project: </b> HOL00 <br/>
+                <b>Task: </b> 1 <br/>
+                <b>Quantity: </b> 100 <br/>
               </div>
             </div>
           </div>
