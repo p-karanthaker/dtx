@@ -7,8 +7,8 @@ function toggleNav() {
   }
 }
 
-document.onclick = function () {
-  //toggleNav();
+document.getElementById("mySidenav").onclick = function () {
+  toggleNav();
 };
 
 $(document).ready(function () {

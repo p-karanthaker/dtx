@@ -34,12 +34,12 @@ public class Controller extends HttpServlet {
 
           resp.sendRedirect(contextPath + "/index.jspx");
         } else {
-          resp.sendRedirect(contextPath + "/login.jsp");
+          resp.sendRedirect(contextPath + "/login.jspx");
         }
         break;
       case "/logout":
         session.invalidate();
-        resp.sendRedirect(contextPath + "/login.jsp");
+        resp.sendRedirect(contextPath + "/login.jspx");
       default:
         break;
     }
