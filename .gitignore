@@ -9,6 +9,9 @@ out/
 *.iml
 *.iws
 
+# Netbeans
+nb-configuration.xml
+
 # Mac
 .DS_Store
 
