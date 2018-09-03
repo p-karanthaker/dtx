@@ -27,13 +27,18 @@ body {
   line-height: 1em;
 }
 
-.timecard:hover {
-  opacity: 0.5;
+.time-button {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
 }
 
 .scrollable-cards {
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 /** Nav Buttons */
@@ -60,34 +65,17 @@ body {
 
 /** Calendar Grid **/
 
-.box {
-  background-color: var(--primary-blue);
-  color: #fff;
-  border-radius: 3px;
-  padding: 5px;
-  font-size: 1em;
+.calendar-table {
+  width: 75%;
+  table-layout: fixed;
 }
 
-.box.other-month {
-  background-color: #ccc;
-}
-
-.box.day {
-  background-color: var(--secondary-blue);
+.calendar-header {
   text-align: center;
 }
 
-.hours {
-  width: 100%;
-}
-
-.wrapper {
-  width: 75%;
-  display: grid;
-  grid-gap: 1px;
-  grid-template-columns: repeat(7, auto);
-  grid-template-rows: 20px repeat(5, auto);
-  grid-auto-flow: row;
+.weekdays input {
+  width: 50%;
 }
 
 /** Side Nav **/
@@ -129,6 +117,10 @@ body {
 
 @media only screen and (max-width: 640px) {
   .wrapper {
+    width: 100%;
+  }
+
+  .calendar-table {
     width: 100%;
   }
 }

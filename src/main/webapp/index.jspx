@@ -1,4 +1,5 @@
-<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0"
+>
   <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
   <jsp:element name="html">
     <jsp:attribute name="lang">EN</jsp:attribute>
@@ -39,40 +40,48 @@
       <main role="main" class="container-fluid">
         <!-- Hidden Side Navigation -->
         <div id="mySidenav" class="sidenav">
-          <h3 class="navItems" style="color: #fff; text-align: center;">Employee Info</h3>
+          <h2 class="navItems" style="color: #fff; text-align: center;">Employee Info</h2>
           <div class="navItems">
             <div class="input-group mb-3">
               <div class="input-group-sm input-group-prepend">
-                <label class="input-group-text">Name</label>
+                <label class="input-group-text" for="employee-name">Name</label>
               </div>
-
-              <input type="text" class="form-control" value="Karan Thaker" disabled="disabled"/>
+              <input type="text" class="form-control" value="Karan Thaker" id="employee-name" disabled="disabled"/>
             </div>
             <div class="input-group mb-3">
               <div class="input-group-sm input-group-prepend">
-                <label class="input-group-text">BU</label>
+                <label class="input-group-text" for="employee-bu">BU</label>
               </div>
-
-              <input type="text" class="form-control" value="GBAPP050" disabled="disabled"/>
+              <input type="text" class="form-control" value="GBAPP050" id="employee-bu" disabled="disabled"/>
             </div>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-lg">
+          <div class="col-lg-4">
+            <form>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <label class="input-group-text">Period</label>
+                <label class="input-group-text" for="date">Period</label>
               </div>
               <input type="text"
                      class="form-control"
-                     placeholder="MMM/YY" id="date"
+                     placeholder="Select a month" id="date"
                      disabled="disabled"/>
               <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" id="datepicker"><span
+                <button class="btn btn-outline-primary" type="button" id="date-prev" aria-label="Previous Month"><span
+                    class="fas fa-angle-left"></span></button>
+              </div>
+              <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" id="datepicker" aria-label="Select Month"><span
                     class="far fa-calendar-alt"></span></button>
               </div>
+              <div class="input-group-append">
+                <button class="btn btn-outline-primary" type="button" id="date-next" aria-label="Next Month"><span
+                    class="fas fa-angle-right"></span></button>
+              </div>
             </div>
+            </form>
             <div class="scrollable-cards">
               <div class="card mb-2 timecard">
                 <div class="card-header py-1">
@@ -84,123 +93,31 @@
                   <b>Task: </b> 1 <br/>
                   <b>Quantity: </b> 100 <br/>
                 </div>
-              </div>
-              <div class="card mb-2 timecard">
-                <div class="card-header py-1">
-                  Standard Time UK<span class="badge badge-warning float-right">Pending Approval</span>
-                </div>
-                <div class="card-body py-1">
-                  <b>From: </b>2018-01-01 <b>To: </b> 2018-12-12 <br/>
-                  <b>Project: </b> HOL00 <br/>
-                  <b>Task: </b> 1 <br/>
-                  <b>Quantity: </b> 100 <br/>
-                </div>
-              </div>
-              <div class="card mb-2 timecard">
-                <div class="card-header py-1">
-                  Standard Time UK<span class="badge badge-warning float-right">Pending Approval</span>
-                </div>
-                <div class="card-body py-1">
-                  <b>From: </b>2018-01-01 <b>To: </b> 2018-12-12 <br/>
-                  <b>Project: </b> HOL00 <br/>
-                  <b>Task: </b> 1 <br/>
-                  <b>Quantity: </b> 100 <br/>
-                </div>
-              </div>
-              <div class="card mb-2 timecard">
-                <div class="card-header py-1">
-                  Standard Time UK<span class="badge badge-warning float-right">Pending Approval</span>
-                </div>
-                <div class="card-body py-1">
-                  <b>From: </b>2018-01-01 <b>To: </b> 2018-12-12 <br/>
-                  <b>Project: </b> HOL00 <br/>
-                  <b>Task: </b> 1 <br/>
-                  <b>Quantity: </b> 100 <br/>
-                </div>
-              </div>
-              <div class="card mb-2 timecard">
-                <div class="card-header py-1">
-                  Standard Time UK<span class="badge badge-warning float-right">Pending Approval</span>
-                </div>
-                <div class="card-body py-1">
-                  <b>From: </b>2018-01-01 <b>To: </b> 2018-12-12 <br/>
-                  <b>Project: </b> HOL00 <br/>
-                  <b>Task: </b> 1 <br/>
-                  <b>Quantity: </b> 100 <br/>
-                </div>
-              </div>
-              <div class="card mb-2 timecard">
-                <div class="card-header py-1">
-                  Standard Time UK<span class="badge badge-warning float-right">Pending Approval</span>
-                </div>
-                <div class="card-body py-1">
-                  <b>From: </b>2018-01-01 <b>To: </b> 2018-12-12 <br/>
-                  <b>Project: </b> HOL00 <br/>
-                  <b>Task: </b> 1 <br/>
-                  <b>Quantity: </b> 100 <br/>
-                </div>
-              </div>
-              <div class="card mb-2 timecard">
-                <div class="card-header py-1">
-                  Standard Time UK<span class="badge badge-warning float-right">Pending Approval</span>
-                </div>
-                <div class="card-body py-1">
-                  <b>From: </b>2018-01-01 <b>To: </b> 2018-12-12 <br/>
-                  <b>Project: </b> HOL00 <br/>
-                  <b>Task: </b> 1 <br/>
-                  <b>Quantity: </b> 100 <br/>
-                </div>
+                <button class="btn btn-sm btn-outline-primary time-button">Details</button>
               </div>
             </div>
           </div>
 
-          <div class="col-lg">
+          <div class="col-lg-8">
             <div class="card scrollable-cards">
               <div class="card-header py-1" id="itemDetails">Item Details</div>
-              <div class="card-body">
-                <div class="wrapper">
-                  <div class="box day">M</div>
-                  <div class="box day">T</div>
-                  <div class="box day">W</div>
-                  <div class="box day">T</div>
-                  <div class="box day">F</div>
-                  <div class="box day">S</div>
-                  <div class="box day">S</div>
-                  <div class="box other-month">.</div>
-                  <div class="box">1 <input class="hours"></input></div>
-                  <div class="box">2 <input class="hours"></input></div>
-                  <div class="box">3 <input class="hours"></input></div>
-                  <div class="box">4 <input class="hours"></input></div>
-                  <div class="box">5 <input class="hours"></input></div>
-                  <div class="box">6 <input class="hours"></input></div>
-                  <div class="box">7 <input class="hours"></input></div>
-                  <div class="box">8 <input class="hours"></input></div>
-                  <div class="box">9 <input class="hours"></input></div>
-                  <div class="box">10 <input class="hours"></input></div>
-                  <div class="box">11<input class="hours"></input></div>
-                  <div class="box">12<input class="hours"></input></div>
-                  <div class="box">13<input class="hours"></input></div>
-                  <div class="box">14<input class="hours"></input></div>
-                  <div class="box">15<input class="hours"></input></div>
-                  <div class="box">16<input class="hours"></input></div>
-                  <div class="box">17<input class="hours"></input></div>
-                  <div class="box">18<input class="hours"></input></div>
-                  <div class="box">19<input class="hours"></input></div>
-                  <div class="box">20<input class="hours"></input></div>
-                  <div class="box">21<input class="hours"></input></div>
-                  <div class="box">22<input class="hours"></input></div>
-                  <div class="box">23<input class="hours"></input></div>
-                  <div class="box">24<input class="hours"></input></div>
-                  <div class="box">25<input class="hours"></input></div>
-                  <div class="box">26<input class="hours"></input></div>
-                  <div class="box">27<input class="hours"></input></div>
-                  <div class="box">28<input class="hours"></input></div>
-                  <div class="box">29<input class="hours"></input></div>
-                  <div class="box">30<input class="hours"></input></div>
-                  <div class="box other-month">.</div>
-                  <div class="box other-month">.</div>
-                  <div class="box other-month">.</div>
-                  <div class="box other-month">.</div>
+              <div class="card-body" id="detail">
+                <div>
+                  <table class="calendar-table">
+                    <thead class="calendar-header">
+                    <tr>
+                      <th>M</th>
+                      <th>T</th>
+                      <th>W</th>
+                      <th>T</th>
+                      <th>F</th>
+                      <th>S</th>
+                      <th>S</th>
+                    </tr>
+                    </thead>
+                    <tbody class="weekdays">
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
