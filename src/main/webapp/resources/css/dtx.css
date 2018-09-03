@@ -41,6 +41,11 @@ body {
   overflow-y: auto;
 }
 
+.item-details {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
 /** Nav Buttons */
 .btn-sq-lg {
   width: 150px !important;

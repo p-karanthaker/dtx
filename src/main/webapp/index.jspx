@@ -96,11 +96,12 @@
                 <button class="btn btn-sm btn-outline-primary time-button">Details</button>
               </div>
             </div>
+            <button class="btn btn-primary" style="width: 100%;" aria-label="New Time Entry">New Time Entry</button>
           </div>
 
           <div class="col-lg-8">
-            <div class="card scrollable-cards">
-              <div class="card-header py-1" id="itemDetails">Item Details</div>
+            <h3>Item Details</h3>
+            <div class="item-details scrollable-cards">
               <div class="card-body" id="detail">
                 <div>
                   <table class="calendar-table">
@@ -124,13 +125,6 @@
           </div>
         </div>
       </main>
-
-      <!-- Footer -->
-      <footer class="navbar navbar-light bg-light fixed-bottom">
-        <div class="container">
-          <span class="text-muted">Sticky footer.</span>
-        </div>
-      </footer>
 
       <!-- Include scripts last to improve page load performance. -->
       <jsp:include page="scripts.jspx"/>
