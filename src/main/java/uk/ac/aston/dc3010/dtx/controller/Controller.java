@@ -5,6 +5,7 @@ import uk.ac.aston.dc3010.dtx.model.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.*;
+import java.util.stream.*;
 
 public class Controller extends HttpServlet {
 
@@ -41,6 +42,8 @@ public class Controller extends HttpServlet {
         session.invalidate();
         resp.sendRedirect(contextPath + "/login.jspx");
       default:
+        System.out.println(action);
+        System.out.println(req.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
         break;
     }
   }

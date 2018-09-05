@@ -6,7 +6,8 @@ $(document).ready(function () {
     view: "months",
     dateFormat: "MM yyyy",
     onSelect: function () {
-      generateCalendar(dp);
+      //generateCalendar(dp);
+      getTimeCards(dp)
     }
   }).data('datepicker');
   dp.selectDate(new Date());
@@ -24,9 +25,9 @@ $(document).ready(function () {
   });
 });
 
-document.getElementById("mySidenav").onclick = function () {
+$('#mySidenav').click(function () {
   toggleNav();
-};
+});
 
 function toggleNav() {
   var nav = document.getElementById("mySidenav");
@@ -49,6 +50,10 @@ function toggleDate(previous, dp) {
   dp.selectDate(currentDate);
 }
 
+/**
+ * Generates a Calendar table based on the selected DatePicker date.
+ * @param dp DatePicker object
+ */
 function generateCalendar(dp) {
   var currentDate = new Date(dp.selectedDates);
   var days = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDate();
@@ -69,5 +74,77 @@ function generateCalendar(dp) {
     } else {
       newCell.innerHTML = '<td></td>';
     }
+  }
+}
+
+// AJAX Requests
+
+/**
+ * Get timecards for a specified period.
+ */
+function getTimeCards(dp) {
+  "use strict";
+  var period = new Date(dp.selectedDates);
+  var xmlhttp;
+  if (period === "") {
+    // display error
+  } else {
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+        //$('tbody').html(xmlhttp.responseText);
+        // Create timecard divs
+      }
+    };
+    period = period.getMonth() + "-" + period.getFullYear();
+    xmlhttp.open("get", "/dtx/getTimecard?Period=" + period, true);
+    xmlhttp.send();
+  }
+}
+
+$('#newTimecard').click(function () {
+  addTimeCard();
+});
+
+/**
+ * Adds a new timecard entry.
+ */
+function addTimeCard() {
+  var projectCode, projectTask, quantity, period, businessReason;
+  var xmlhttp;
+  xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+
+    }
+  };
+  xmlhttp.open("post", "/dtx/addTimecard", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.send("projectCode=" + projectCode
+      + "&projectTask=" + projectTask
+      + "&quantity=" + quantity
+      + "&period=" + period
+      + "&businessReason=" + businessReason);
+}
+
+/**
+ * Gets details of selected timecard.
+ */
+function getTimecardDetails() {
+  "use strict";
+  var timecardId;
+  var xmlhttp;
+  if (timecardId === "") {
+    // display error
+  } else {
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+        //$('tbody').html(xmlhttp.responseText);
+        // display timecard details
+      }
+    };
+    xmlhttp.open("get", "/dtx/getTimecard?TimecardId=" + timecardId, true);
+    xmlhttp.send();
   }
 }

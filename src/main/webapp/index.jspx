@@ -96,7 +96,7 @@
                 <button class="btn btn-sm btn-outline-primary time-button">Details</button>
               </div>
             </div>
-            <button class="btn btn-primary" style="width: 100%;" aria-label="New Time Entry">New Time Entry</button>
+            <button class="btn btn-primary" id="newTimecard" style="width: 100%;" aria-label="New Time Card">New Time Card</button>
           </div>
 
           <div class="col-lg-8">
