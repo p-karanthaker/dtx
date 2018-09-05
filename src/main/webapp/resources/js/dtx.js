@@ -97,7 +97,7 @@ function getTimeCards(dp) {
       }
     };
     period = period.getMonth() + "-" + period.getFullYear();
-    xmlhttp.open("get", "/dtx/getTimecard?Period=" + period, true);
+    xmlhttp.open("get", "/dtx/getTimecards?Period=" + period, true);
     xmlhttp.send();
   }
 }

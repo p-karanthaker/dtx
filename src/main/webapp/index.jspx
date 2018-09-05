@@ -60,27 +60,27 @@
         <div class="row">
           <div class="col-lg-4">
             <form>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="date">Period</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="date">Period</label>
+                </div>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Select a month" id="date"
+                       disabled="disabled"/>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary" type="button" id="date-prev" aria-label="Previous Month"><span
+                      class="fas fa-angle-left"></span></button>
+                </div>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary" type="button" id="datepicker" tabindex="-1" aria-label="Select Month"><span
+                      class="far fa-calendar-alt"></span></button>
+                </div>
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary" type="button" id="date-next" aria-label="Next Month"><span
+                      class="fas fa-angle-right"></span></button>
+                </div>
               </div>
-              <input type="text"
-                     class="form-control"
-                     placeholder="Select a month" id="date"
-                     disabled="disabled"/>
-              <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" id="date-prev" aria-label="Previous Month"><span
-                    class="fas fa-angle-left"></span></button>
-              </div>
-              <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" id="datepicker" aria-label="Select Month"><span
-                    class="far fa-calendar-alt"></span></button>
-              </div>
-              <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" id="date-next" aria-label="Next Month"><span
-                    class="fas fa-angle-right"></span></button>
-              </div>
-            </div>
             </form>
             <div class="scrollable-cards">
               <div class="card mb-2 timecard">
@@ -96,7 +96,9 @@
                 <button class="btn btn-sm btn-outline-primary time-button">Details</button>
               </div>
             </div>
-            <button class="btn btn-primary" id="newTimecard" style="width: 100%;" aria-label="New Time Card">New Time Card</button>
+            <button class="btn btn-primary" id="newTimecard" style="width: 100%;"
+                    aria-label="New Time Card">New Time Card
+            </button>
           </div>
 
           <div class="col-lg-8">
