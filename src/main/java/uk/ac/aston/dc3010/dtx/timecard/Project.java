@@ -36,8 +36,7 @@ public class Project {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("\nProject: " + name)
-        .append("\nTask: " + task);
+    sb.append("\nProject: " + name).append("\nTask: " + task);
     return sb.toString();
   }
 }

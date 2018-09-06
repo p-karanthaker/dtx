@@ -14,6 +14,17 @@
     <url-pattern>/dtx/*</url-pattern>
   </servlet-mapping>
 
+  <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>uk.ac.aston.dc3010.dtx.controller.LoginFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/index.jspx</url-pattern>
+    <url-pattern>/dtx/app/*</url-pattern>
+  </filter-mapping>
+
   <resource-ref>
     <res-ref-name>jdbc/DTXDatabase</res-ref-name>
     <res-type>javax.sql.DataSource</res-type>

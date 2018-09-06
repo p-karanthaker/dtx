@@ -7,7 +7,7 @@ $(document).ready(function () {
     dateFormat: "MM yyyy",
     onSelect: function () {
       //generateCalendar(dp);
-      getTimeCards(dp)
+      getTimecards(dp)
     }
   }).data('datepicker');
   dp.selectDate(new Date());
@@ -82,24 +82,42 @@ function generateCalendar(dp) {
 /**
  * Get timecards for a specified period.
  */
-function getTimeCards(dp) {
+function getTimecards(dp) {
   "use strict";
   var period = new Date(dp.selectedDates);
-  var xmlhttp;
-  if (period === "") {
-    // display error
-  } else {
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-        //$('tbody').html(xmlhttp.responseText);
-        // Create timecard divs
+  var month = period.getMonth() + 1;
+  period = period.getFullYear() + "-" + month;
+  
+  $.ajax({
+    type : "GET",
+    url : "/dtx/app/getTimecards",
+    data : {
+      "period" : period
+    },
+    success : function (timecards) {
+      var html = "";
+      if (!$.isArray(timecards) || !timecards.length) {
+        html = "Nothing to display.";
+      } else {
+        timecards.forEach(function (entry) {
+          html +=
+              '<div class="card mb-2 timecard">' +
+              '<div class="card-header py-1">' + entry['category']['name'] + '<span class="badge badge-success float-right">' +
+              entry['status'] + '</span>' +
+              '</div>' +
+              '<div class="card-body py-1">' +
+              '<b>From: </b>' + entry['hours'][0]['date'] + ' <b>To: </b>' + entry['hours'][entry['hours'].length - 1]['date'] + '<br/>' +
+              '<b>Project: </b>' + entry['project']['name'] + '<br/>' +
+              '<b>Task: </b>' + entry['project']['task'] + '<br/>' +
+              '<b>Quantity: </b>' + entry['quantity'] + '<br/>' +
+              '</div>' +
+              '<button class="btn btn-sm btn-outline-primary time-button">Details</button>' +
+              '</div>';
+        });
       }
-    };
-    period = period.getMonth() + "-" + period.getFullYear();
-    xmlhttp.open("get", "/dtx/getTimecards?Period=" + period, true);
-    xmlhttp.send();
-  }
+      $('#timecards').html(html);
+    }
+  });
 }
 
 $('#newTimecard').click(function () {
@@ -118,7 +136,7 @@ function addTimeCard() {
 
     }
   };
-  xmlhttp.open("post", "/dtx/addTimecard", true);
+  xmlhttp.open("post", "/dtx/app/addTimecard", true);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send("projectCode=" + projectCode
       + "&projectTask=" + projectTask
@@ -144,7 +162,7 @@ function getTimecardDetails() {
         // display timecard details
       }
     };
-    xmlhttp.open("get", "/dtx/getTimecard?TimecardId=" + timecardId, true);
+    xmlhttp.open("get", "/dtx/app/getTimecard?TimecardId=" + timecardId, true);
     xmlhttp.send();
   }
 }

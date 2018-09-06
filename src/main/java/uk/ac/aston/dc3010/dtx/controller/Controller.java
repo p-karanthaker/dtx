@@ -1,20 +1,27 @@
 package uk.ac.aston.dc3010.dtx.controller;
 
-import uk.ac.aston.dc3010.dtx.model.*;
+import com.google.gson.Gson;
+import uk.ac.aston.dc3010.dtx.dao.TimecardDAO;
+import uk.ac.aston.dc3010.dtx.dao.UserDAO;
+import uk.ac.aston.dc3010.dtx.model.User;
+import uk.ac.aston.dc3010.dtx.timecard.Timecard;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.*;
-import java.util.stream.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller extends HttpServlet {
 
-  private Users users;
+  private User user = null;
+  private List<Timecard> cards = new ArrayList<>();
   private HttpSession session;
 
-  public void init() {
-    users = new Users();
-  }
+  public void init() {}
 
   public void destroy() {}
 
@@ -29,21 +36,29 @@ public class Controller extends HttpServlet {
       case "/login":
         final String username = req.getParameter("username");
         final String password = req.getParameter("password");
-        Users users = new Users();
-        if (users.authenticate(username, password)) {
-          session.setAttribute("user", username);
-
+        UserDAO userDAO = new UserDAO();
+        if (userDAO.authenticate(username, password)) {
+          this.user = userDAO.getUser();
+          session.setAttribute("user", user);
           resp.sendRedirect(contextPath + "/index.jspx");
         } else {
           resp.sendRedirect(contextPath + "/login.jspx");
         }
         break;
-      case "/logout":
+      case "/app/logout":
         session.invalidate();
         resp.sendRedirect(contextPath + "/login.jspx");
+        break;
+      case "/app/getTimecards":
+        String period = req.getParameter("period");
+        TimecardDAO dao = new TimecardDAO();
+        cards = dao.getTimecards(user.getId(), period);
+        resp.setContentType("application/json");
+        new Gson().toJson(cards, resp.getWriter());
+        break;
+      case "/app/getTimecardDetails":
+        System.out.println(cards);
       default:
-        System.out.println(action);
-        System.out.println(req.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
         break;
     }
   }

@@ -64,12 +64,16 @@ public class Timecard {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("ID: ").append(id)
+    sb.append("ID: ")
+        .append(id)
         .append(category)
         .append(project)
-        .append("\nBusiness Reason: ").append(businessReason)
-        .append("\nStatus: ").append(status)
-        .append("\nHours: ").append(hours)
+        .append("\nBusiness Reason: ")
+        .append(businessReason)
+        .append("\nStatus: ")
+        .append(status)
+        .append("\nHours: ")
+        .append(hours)
         .append("\n");
     return sb.toString();
   }

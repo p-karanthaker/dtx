@@ -2,8 +2,6 @@ package uk.ac.aston.dc3010.dtx.timecard;
 
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 public class Hours {
 
@@ -15,13 +13,7 @@ public class Hours {
     this.quantity = quantity;
   }
 
-  public String getDate(){
-    String date = "";
-    try {
-      date = new SimpleDateFormat("yyyy-MM-dd").parse(date).toString();
-    } catch (ParseException e) {
-      // do nothing
-    }
+  public String getDate() {
     return date;
   }
 

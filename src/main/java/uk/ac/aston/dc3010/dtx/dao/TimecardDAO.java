@@ -9,10 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TimecardDAO {
@@ -38,9 +35,10 @@ public class TimecardDAO {
     try (Connection connection = dataSource.getConnection()) {
       if (connection != null) {
         // Update timecard
-        String query = "INSERT INTO timecard " +
-            "(employee, category, project_code, project_task, quantity, period, business_reason, status)" +
-            "VALUES (?,?,?,?,?,?,?,?)";
+        String query =
+            "INSERT INTO timecard "
+                + "(employee, category, project_code, project_task, quantity, period, business_reason, status)"
+                + "VALUES (?,?,?,?,?,?,?,?)";
 
         PreparedStatement ps = connection.prepareStatement(query);
         ps.setInt(1, employeeId);
@@ -50,28 +48,28 @@ public class TimecardDAO {
         ps.setFloat(5, tc.getQuantity());
         ps.setString(6, period);
         ps.setString(7, tc.getBusinessReason());
-        ps.setString(8, tc.getStatus().toString());
+        ps.setInt(8, tc.getStatus().getCode());
 
-        ps.executeUpdate();
+        int success = ps.executeUpdate();
 
-        int timecardId = 0;
-        try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-          if (generatedKeys.next())
-            timecardId = generatedKeys.getInt(1);
+        if (success == 1) {
+          ResultSet rs = ps.getGeneratedKeys();
+          int timecardId = 0;
+          if (rs.next()) {
+            timecardId = rs.getInt(1);
+          }
+
+          query = "INSERT INTO timecard_hours (timecard, date, quantity) VALUES (?,?,?)";
+          ps = connection.prepareStatement(query);
+
+          for (Hours hours : tc.getHours()) {
+            ps.setInt(1, timecardId);
+            ps.setString(2, hours.getDate());
+            ps.setFloat(3, hours.getQuantity());
+            ps.addBatch();
+          }
+          ps.executeBatch();
         }
-
-        // Update hours
-        String query2 = "INSERT INTO timecard_hours (timecard, date, quantity) VALUES (?,?,?)";
-
-        ps = connection.prepareStatement(query2);
-        for (Hours hour : tc.getHours()) {
-          ps.setInt(1, timecardId);
-          ps.setString(2, hour.getDate());
-          ps.setFloat(3, hour.getQuantity());
-          ps.addBatch();
-        }
-        ps.executeBatch();
-
       }
     } catch (SQLException e) {
       System.out.println("Exception: " + e.getMessage());
@@ -108,7 +106,8 @@ public class TimecardDAO {
 
           Timecard timecard = new Timecard(category, project, quantity, status);
           timecard.setId(id);
-          if (businessReason != null && !businessReason.isEmpty()) timecard.setBusinessReason(businessReason);
+          if (businessReason != null && !businessReason.isEmpty())
+            timecard.setBusinessReason(businessReason);
           timecards.add(timecard);
         }
 

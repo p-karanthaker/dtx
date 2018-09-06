@@ -27,7 +27,7 @@ public class TimecardTest {
 
   @Test
   public void testGetTimecards() {
-    List<Timecard> cards = dao.getTimecards(1, "2018-08-01");
+    List<Timecard> cards = dao.getTimecards(1, "2018-09");
     for (Timecard t : cards) {
       System.out.println(t);
     }
@@ -40,8 +40,8 @@ public class TimecardTest {
     float quantity = 7.5f;
     Timecard tc = new Timecard(category, project, quantity, Status.PENDING);
     List<Hours> hours = new ArrayList<>();
-    hours.add(new Hours("2018-09-10", 7.5f));
+    // hours.add(new Hours("2018-09-10", 7.5f));
     tc.setHours(hours);
-    dao.addTimecard(1, "2018-09-01", tc);
+    dao.addTimecard(1, "2018-09", tc);
   }
 }

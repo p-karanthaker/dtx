@@ -1,4 +1,6 @@
-package uk.ac.aston.dc3010.dtx.model;
+package uk.ac.aston.dc3010.dtx.dao;
+
+import uk.ac.aston.dc3010.dtx.model.User;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -8,12 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Users {
+public class UserDAO {
 
   private DataSource dataSource = null;
+  private User user = null;
 
-  public Users() {
-
+  public UserDAO() {
     try {
       Context context = new InitialContext();
       Context environment = (Context) context.lookup("java:comp/env");
@@ -27,8 +29,7 @@ public class Users {
   public boolean authenticate(String username, String password) {
     try (Connection connection = dataSource.getConnection()) {
       if (connection != null) {
-        final String query =
-            "SELECT username, password FROM employee WHERE username = ? AND password = ?";
+        final String query = "SELECT * FROM employee WHERE username = ? AND password = ?";
 
         final PreparedStatement ps = connection.prepareStatement(query);
         ps.setString(1, username);
@@ -38,8 +39,14 @@ public class Users {
         String user = null;
         String pword = null;
         while (rs.next()) {
+          int id = rs.getInt("id");
+          int empNum = rs.getInt("emp_num");
+          String firstName = rs.getString("first_name");
+          String lastName = rs.getString("last_name");
+          String businessUnit = rs.getString("business_unit");
           user = rs.getString("username");
           pword = rs.getString("password");
+          this.user = new User(id, empNum, firstName, lastName, businessUnit);
         }
 
         if ((user != null && pword != null) && (user.equals(username) && pword.equals(password))) {
@@ -51,5 +58,9 @@ public class Users {
     }
 
     return false;
+  }
+
+  public User getUser() {
+    return user;
   }
 }
