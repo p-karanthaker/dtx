@@ -22,6 +22,31 @@ body {
   --secondary-opacity-95: rgba(18, 171, 219, 0.95);
 }
 
+.btn-primary {
+  color: #fff;
+  background-color: var(--primary-blue);
+  border-color: var(--secondary-blue);
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: var(--secondary-blue);
+  border-color: var(--primary-blue);
+}
+
+.btn-outline-primary {
+  color: var(--primary-blue);
+  background-color: transparent;
+  background-image: none;
+  border-color: var(--primary-blue);
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+}
+
 /** Time Cards **/
 .card-body {
   line-height: 1em;

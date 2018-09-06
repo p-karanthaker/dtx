@@ -57,8 +57,22 @@ public class Controller extends HttpServlet {
         new Gson().toJson(cards, resp.getWriter());
         break;
       case "/app/getTimecardDetails":
-        System.out.println(cards);
+        int id = Integer.parseInt(req.getParameter("id"));
+        Timecard toReturn = null;
+        for (Timecard card : cards) {
+          if (card.getId() == id) {
+            toReturn = card;
+          }
+        }
+        resp.setContentType("application/json");
+        if (toReturn != null) {
+          new Gson().toJson(toReturn, resp.getWriter());
+        } else {
+          new Gson().toJson("error: 'No details found'", resp.getWriter());
+        }
+        break;
       default:
+        System.out.println("Hello");
         break;
     }
   }

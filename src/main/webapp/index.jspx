@@ -92,26 +92,10 @@
           </div>
 
           <div class="col-lg-8">
-            <h3>Item Details</h3>
+            <h3>Timecard Details</h3>
             <div class="item-details scrollable-cards">
               <div class="card-body" id="detail">
-                <div>
-                  <table class="calendar-table">
-                    <thead class="calendar-header">
-                    <tr>
-                      <th>M</th>
-                      <th>T</th>
-                      <th>W</th>
-                      <th>T</th>
-                      <th>F</th>
-                      <th>S</th>
-                      <th>S</th>
-                    </tr>
-                    </thead>
-                    <tbody class="weekdays">
-                    </tbody>
-                  </table>
-                </div>
+
               </div>
             </div>
           </div>

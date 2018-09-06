@@ -6,8 +6,7 @@ $(document).ready(function () {
     view: "months",
     dateFormat: "MM yyyy",
     onSelect: function () {
-      //generateCalendar(dp);
-      getTimecards(dp)
+      getTimecards(dp);
     }
   }).data('datepicker');
   dp.selectDate(new Date());
@@ -54,27 +53,45 @@ function toggleDate(previous, dp) {
  * Generates a Calendar table based on the selected DatePicker date.
  * @param dp DatePicker object
  */
-function generateCalendar(dp) {
+function generateCalendar(dp, hours) {
   var currentDate = new Date(dp.selectedDates);
   var days = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDate();
   var start = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
 
-  var calendar = document.getElementsByClassName('calendar-table')[0].getElementsByTagName('tbody')[0];
+  var calendar = $('<div><table class="calendar-table">' +
+      '<thead class="calendar-header"><tr><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th><th>S</th></tr>' +
+      '</thead><tbody class="weekdays"></tbody></table></div>');
+
+  var tbody = $('.weekdays', calendar)[0];
+  //var calendar = document.getElementsByClassName('calendar-table')[0].getElementsByTagName('tbody')[0];
   var i;
   for (i = 1; i<36; i++)
   {
     if (i % 7 == 1) {
-      var newRow = calendar.insertRow(calendar.rows.length);
+      var newRow = tbody.insertRow(tbody.rows.length);
     }
     var newCell = newRow.insertCell(-1);
     if (i >= start && i < days + start) {
       var day = i - start + 1;
       day = ('0'+day).slice(-2);
-      newCell.innerHTML = "<td>"+ day +" <input type=\"text\"/></td>";
+
+      var tempCell;
+      var label = "day-" + day;
+      for (let entry of hours) {
+        var date = new Date(entry['date']).getDate();
+        if (day == date) {
+          tempCell = '<td><label for="' + label + '">'+ day + '</label> <input type="text" value="'+ entry['quantity'] +'" id="' + label + '"/></td>';
+          break;
+        } else {
+          tempCell = '<td><label for="' + label + '">'+ day + '</label> <input type="text" id="' + label + '"/></td>';
+        }
+      }
+      newCell.innerHTML = tempCell;
     } else {
       newCell.innerHTML = '<td></td>';
     }
   }
+  return calendar.html();
 }
 
 // AJAX Requests
@@ -83,7 +100,6 @@ function generateCalendar(dp) {
  * Get timecards for a specified period.
  */
 function getTimecards(dp) {
-  "use strict";
   var period = new Date(dp.selectedDates);
   var month = period.getMonth() + 1;
   period = period.getFullYear() + "-" + month;
@@ -109,9 +125,9 @@ function getTimecards(dp) {
               '<b>From: </b>' + entry['hours'][0]['date'] + ' <b>To: </b>' + entry['hours'][entry['hours'].length - 1]['date'] + '<br/>' +
               '<b>Project: </b>' + entry['project']['name'] + '<br/>' +
               '<b>Task: </b>' + entry['project']['task'] + '<br/>' +
-              '<b>Quantity: </b>' + entry['quantity'] + '<br/>' +
+              '<b>Quantity: </b>' + entry['quantity'] + ' hours<br/>' +
               '</div>' +
-              '<button class="btn btn-sm btn-outline-primary time-button">Details</button>' +
+              '<button class="btn btn-sm btn-outline-primary time-button" id="' + entry['id'] + '">Details</button>' +
               '</div>';
         });
       }
@@ -120,8 +136,23 @@ function getTimecards(dp) {
   });
 }
 
-$('#newTimecard').click(function () {
-  addTimeCard();
+$('#timecards').on('click', 'button', function () {
+  var timecardId = $(this).attr('id');
+  $.ajax({
+    type : "GET",
+    url : "/dtx/app/getTimecardDetails",
+    data : {
+      "id" : timecardId
+    },
+    success : function (timecard) {
+      var html =
+          '<h4 class="card-title">' + timecard['category']['name'] + '</h4>' +
+          '<h5>Project: ' + timecard['project']['name'] + ' | Task: ' + timecard['project']['task'] + '</h5>';
+      var dp = $('#date').data('datepicker');
+      html += generateCalendar(dp, timecard['hours']);
+      $('#detail').html(html);
+    }
+  });
 });
 
 /**
