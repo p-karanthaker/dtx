@@ -63,7 +63,6 @@ function generateCalendar(dp, hours) {
       '</thead><tbody class="weekdays"></tbody></table></div>');
 
   var tbody = $('.weekdays', calendar)[0];
-  //var calendar = document.getElementsByClassName('calendar-table')[0].getElementsByTagName('tbody')[0];
   var i;
   for (i = 1; i<36; i++)
   {
@@ -77,13 +76,13 @@ function generateCalendar(dp, hours) {
 
       var tempCell;
       var label = "day-" + day;
-      for (let entry of hours) {
+      for (var entry in hours) {
         var date = new Date(entry['date']).getDate();
         if (day == date) {
-          tempCell = '<td><label for="' + label + '">'+ day + '</label> <input type="text" value="'+ entry['quantity'] +'" id="' + label + '"/></td>';
+          tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" value="'+ entry['quantity'] +'" id="' + label + '"/></td>';
           break;
         } else {
-          tempCell = '<td><label for="' + label + '">'+ day + '</label> <input type="text" id="' + label + '"/></td>';
+          tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" id="' + label + '"/></td>';
         }
       }
       newCell.innerHTML = tempCell;
@@ -146,10 +145,47 @@ $('#timecards').on('click', 'button', function () {
     },
     success : function (timecard) {
       var html =
-          '<h4 class="card-title">' + timecard['category']['name'] + '</h4>' +
-          '<h5>Project: ' + timecard['project']['name'] + ' | Task: ' + timecard['project']['task'] + '</h5>';
+          '<h4>Reference: 111</h4>' +
+          '<form>' +
+            '<div class="input-group input-group-sm mb-1">' +
+              '<div class="input-group-prepend">' +
+                '<label class="input-group-text" for="category">Category</label>' +
+              '</div>' +
+              '<select class="form-control" aria-label="Category" id="category" disabled="disabled">' +
+                '<option>' + timecard['category']['name'] + '</option>' +
+              '</select>' +
+            '</div>' +
+            '<div class="input-group input-group-sm mb-1">' +
+              '<div class="input-group-prepend">' +
+                '<label class="input-group-text" for="project">Project</label>' +
+              '</div>' +
+              '<input type="text" class="form-control" aria-label="Project" id="project" value="' + timecard['project']['name'] + '" disabled="disabled"/>' +
+              '<div class="input-group-prepend">' +
+                '<label class="input-group-text" for="task">Task</label>' +
+              '</div>' +
+              '<select class="form-control" aria-label="Task" id="task" disabled="disabled">' +
+                '<option>' + timecard['project']['task'] + '</option>' +
+              '</select>' +
+            '</div>' +
+            '<div class="input-group input-group-sm mb-1">' +
+              '<div class="input-group-prepend">' +
+                '<label class="input-group-text" for="hours">Time Booked</label>' +
+              '</div>' +
+              '<input type="text" class="form-control" aria-label="Hours" id="hours" value="' + timecard['quantity'] + ' Hours" disabled="disabled"/>' +
+            '</div>' +
+          '</form>';
       var dp = $('#date').data('datepicker');
       html += generateCalendar(dp, timecard['hours']);
+      var businessReason = timecard['businessReason'];
+      if (typeof businessReason === "undefined") {
+        businessReason = "";
+      }
+      html +=
+          '<br />' +
+          '<div class="form-group">' +
+          '<label for="business-reason">Business Reason:</label>' +
+          '<textarea class="form-control" rows="5" id="business-reason" disabled="disabled">' + businessReason + '</textarea>' +
+          '</div>';
       $('#detail').html(html);
     }
   });

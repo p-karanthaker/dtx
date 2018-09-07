@@ -16,7 +16,7 @@
       <!-- Navigation -->
       <header>
         <nav class="navbar fixed-top navbar-light bg-light">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="index.jspx">
             <img src="/resources/images/capgemini-logo.png" height="50" class="d-inline-block align-top"
                  alt="Capgemini Logo"/>
           </a>
@@ -60,7 +60,7 @@
         <div class="row">
           <div class="col-lg-4">
             <form>
-              <div class="input-group mb-3">
+              <div class="input-group mb-3 input-group-sm">
                 <div class="input-group-prepend">
                   <label class="input-group-text" for="date">Period</label>
                 </div>

@@ -96,16 +96,29 @@ body {
 /** Calendar Grid **/
 
 .calendar-table {
-  width: 75%;
-  table-layout: fixed;
+  font-size: 10pt;
+  width: 50%;
 }
 
-.calendar-header {
+.calendar-header>tr {
+  text-align: center;
+  background-color: var(--primary-blue);
+  color: #fff;
+}
+
+.weekdays label {
+}
+
+.weekdays tr {
   text-align: center;
 }
 
+.weekdays td {
+  border: 1px solid gray;
+}
+
 .weekdays input {
-  width: 50%;
+  width: 75%;
 }
 
 /** Side Nav **/
@@ -146,10 +159,6 @@ body {
 }
 
 @media only screen and (max-width: 640px) {
-  .wrapper {
-    width: 100%;
-  }
-
   .calendar-table {
     width: 100%;
   }
