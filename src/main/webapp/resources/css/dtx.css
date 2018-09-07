@@ -1,179 +1,156 @@
-/** Override to Capgemini fonts **/
 @font-face {
-  font-family: Ubuntu;
-  src: url("/resources/fonts/Ubuntu-R.ttf");
+  font-family: Ubuntu,Verdana,sans-serif;
+  font-display: optional;
+  src: url(/resources/fonts/Ubuntu-R.ttf)
 }
 
-html {
-  font-family: "Ubuntu", "Verdana", sans-serif;
+body,html {
+  font-family: Ubuntu,Verdana,sans-serif;
+}
+
+.calendar-header>tr,.weekdays tr {
+  text-align: center
 }
 
 body {
-  font-family: "Ubuntu", "Verdana", sans-serif;
   padding-top: 100px;
-  padding-bottom: 100px;
+  padding-bottom: 100px
 }
 
-/** Capgemini official colours **/
 :root {
-  --primary-blue: #0070ad;
-  --secondary-blue: #12abdb;
-  --primary-opacity-95: rgba(0, 112, 173, 0.95);
-  --secondary-opacity-95: rgba(18, 171, 219, 0.95);
-}
+  --primary-blue:#0070ad;--secondary-blue:#12abdb;--primary-opacity-95:rgba(0, 112, 173, 0.95);--secondary-opacity-95:rgba(18, 171, 219, 0.95)}
 
 .btn-primary {
   color: #fff;
   background-color: var(--primary-blue);
-  border-color: var(--secondary-blue);
+  border-color: var(--secondary-blue)
+}
+
+.btn-outline-primary,.btn-outline-primary:hover,.btn-primary:hover {
+  border-color: var(--primary-blue)
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: var(--secondary-blue);
-  border-color: var(--primary-blue);
+  background-color: var(--secondary-blue)
 }
 
 .btn-outline-primary {
   color: var(--primary-blue);
   background-color: transparent;
-  background-image: none;
-  border-color: var(--primary-blue);
+  background-image: none
 }
 
-.btn-outline-primary:hover {
-  color: #fff;
+.btn-outline-primary:hover,.calendar-header>tr {
   background-color: var(--primary-blue);
-  border-color: var(--primary-blue);
+  color: #fff
 }
 
-/** Time Cards **/
 .card-body {
-  line-height: 1em;
+  line-height: 1em
 }
 
 .time-button {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  border-top: 1px solid rgba(0,0,0,.125);
   border-left: none;
   border-right: none;
-  border-bottom: none;
+  border-bottom: none
 }
 
 .scrollable-cards {
   height: 100%;
-  overflow-y: auto;
+  overflow-y: auto
 }
 
 .item-details {
-  border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem
 }
 
-/** Nav Buttons */
 .btn-sq-lg {
-  width: 150px !important;
-  height: 150px !important;
+  width: 150px!important;
+  height: 150px!important
 }
 
 .btn-sq {
-  width: 100px !important;
-  height: 100px !important;
+  width: 100px!important;
+  height: 100px!important
 }
 
 .btn-sq-sm {
-  width: 50px !important;
-  height: 50px !important;
+  width: 50px!important;
+  height: 50px!important
 }
 
 .btn-sq-xs {
-  width: 25px !important;
-  height: 25px !important;
-  padding: 2px;
+  width: 25px!important;
+  height: 25px!important;
+  padding: 2px
 }
-
-/** Calendar Grid **/
 
 .calendar-table {
   font-size: 10pt;
-  width: 50%;
-}
-
-.calendar-header>tr {
-  text-align: center;
-  background-color: var(--primary-blue);
-  color: #fff;
-}
-
-.weekdays label {
-}
-
-.weekdays tr {
-  text-align: center;
+  width: 50%
 }
 
 .weekdays td {
-  border: 1px solid gray;
+  border: 1px solid gray
 }
 
 .weekdays input {
-  width: 75%;
+  width: 75%
 }
 
-/** Side Nav **/
 .sidenav {
   height: 100%;
-  width: 0; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 10000; /* Stay on top */
+  width: 0;
+  position: fixed;
+  z-index: 10000;
   top: 0;
   right: 0;
   padding-top: 60px;
   background-color: var(--primary-opacity-95);
-  overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  overflow-x: hidden;
+  transition: .5s
 }
 
 .navItems {
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 10px
 }
 
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidenav {
-    padding-top: 15px;
+    padding-top:15px
   }
 
   .sidenav a {
-    font-size: 18px;
+    font-size: 18px
   }
 }
 
-/** Media Queries **/
 @media only screen and (max-width: 991px) {
   .scrollable-cards {
-    height: 50%;
+    height:50%
   }
 }
 
 @media only screen and (max-width: 640px) {
   .calendar-table {
-    width: 100%;
+    width:100%
   }
 }
 
 @media only screen and (max-width: 575px) {
   body {
-    padding-top: 110px;
+    padding-top:110px
   }
 }
 
 @media only screen and (max-width: 462px) {
   body {
-    padding-top: 160px;
+    padding-top:160px
   }
 }
-
-
