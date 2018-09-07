@@ -80,9 +80,9 @@ function generateCalendar(dp, hours) {
       var tempCell;
       var label = "day-" + day;
       for (var entry in hours) {
-        var date = new Date(hours[entry]['date']).getDate();
+        var date = new Date(hours[entry].date).getDate();
         if (day == date) {
-          tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" value="'+ hours[entry]['quantity'] +'" id="' + label + '"/></td>';
+          tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" value="'+ hours[entry].quantity +'" id="' + label + '"/></td>';
           break;
         } else {
           tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" id="' + label + '"/></td>';
@@ -171,16 +171,16 @@ function getTimecards(period) {
         timecards.forEach(function (entry) {
           html +=
               '<div class="card mb-2 timecard">' +
-              '<div class="card-header py-1">' + entry['category']['name'] + '<span class="badge badge-success float-right">' +
+              '<div class="card-header py-1">' + entry.category.name + '<span class="badge badge-success float-right">' +
               entry['status'] + '</span>' +
               '</div>' +
               '<div class="card-body py-1">' +
-              '<b>From: </b>' + entry['hours'][0]['date'] + ' <b>To: </b>' + entry['hours'][entry['hours'].length - 1]['date'] + '<br/>' +
-              '<b>Project: </b>' + entry['project']['name'] + '<br/>' +
-              '<b>Task: </b>' + entry['project']['task'] + '<br/>' +
-              '<b>Quantity: </b>' + entry['quantity'] + ' hours<br/>' +
+              '<b>From: </b>' + entry.hours[0].date + ' <b>To: </b>' + entry.hours[entry.hours.length - 1].date + '<br/>' +
+              '<b>Project: </b>' + entry.project.name + '<br/>' +
+              '<b>Task: </b>' + entry.project.task + '<br/>' +
+              '<b>Quantity: </b>' + entry.quantity + ' hours<br/>' +
               '</div>' +
-              '<button class="btn btn-sm btn-outline-primary time-button" id="' + entry['id'] + '">Details</button>' +
+              '<button class="btn btn-sm btn-outline-primary time-button" id="' + entry.id + '">Details</button>' +
               '</div>';
         });
       }
@@ -234,38 +234,38 @@ function getTimecardDetails(timecardId) {
     },
     success : function (timecard) {
       var html =
-          '<h4>Reference: 111</h4>' +
+          '<h4>Reference: ' + timecard.id + '</h4>' +
           '<form>' +
           '<div class="input-group input-group-sm mb-1">' +
           '<div class="input-group-prepend">' +
           '<label class="input-group-text" for="category">Category</label>' +
           '</div>' +
           '<select class="form-control" aria-label="Category" id="category" disabled="disabled">' +
-          '<option>' + timecard['category']['name'] + '</option>' +
+          '<option>' + timecard.category.name + '</option>' +
           '</select>' +
           '</div>' +
           '<div class="input-group input-group-sm mb-1">' +
           '<div class="input-group-prepend">' +
           '<label class="input-group-text" for="project">Project</label>' +
           '</div>' +
-          '<input type="text" class="form-control" aria-label="Project" id="project" value="' + timecard['project']['name'] + '" disabled="disabled"/>' +
+          '<input type="text" class="form-control" aria-label="Project" id="project" value="' + timecard.project.name + '" disabled="disabled"/>' +
           '<div class="input-group-prepend">' +
           '<label class="input-group-text" for="task">Task</label>' +
           '</div>' +
           '<select class="form-control" aria-label="Task" id="task" disabled="disabled">' +
-          '<option>' + timecard['project']['task'] + '</option>' +
+          '<option>' + timecard.project.task + '</option>' +
           '</select>' +
           '</div>' +
           '<div class="input-group input-group-sm mb-1">' +
           '<div class="input-group-prepend">' +
           '<label class="input-group-text" for="hours">Time Booked</label>' +
           '</div>' +
-          '<input type="text" class="form-control" aria-label="Hours" id="hours" value="' + timecard['quantity'] + ' Hours" disabled="disabled"/>' +
+          '<input type="text" class="form-control" aria-label="Hours" id="hours" value="' + timecard.quantity + ' Hours" disabled="disabled"/>' +
           '</div>' +
           '</form>';
       var dp = $('#date').data('datepicker');
-      html += generateCalendar(dp, timecard['hours']);
-      var businessReason = timecard['businessReason'];
+      html += generateCalendar(dp, timecard.hours);
+      var businessReason = timecard.businessReason;
       if (typeof businessReason === "undefined") {
         businessReason = "";
       }
