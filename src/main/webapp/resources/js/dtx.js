@@ -6,7 +6,8 @@ $(document).ready(function () {
     view: "months",
     dateFormat: "MM yyyy",
     onSelect: function () {
-      getTimecards(dp);
+      getTimecards(getPeriod(dp));
+      $('#detail').html("Click timecard details to view more information.");
     }
   }).data('datepicker');
   dp.selectDate(new Date());
@@ -48,6 +49,8 @@ function toggleDate(previous, dp) {
   currentDate.setMonth(month);
   dp.selectDate(currentDate);
 }
+
+// Helper Functions
 
 /**
  * Generates a Calendar table based on the selected DatePicker date.
@@ -93,39 +96,6 @@ function generateCalendar(dp, hours) {
   return calendar.html();
 }
 
-$('#newTimecard').click(function () {
-  var dp = $('#date').data('datepicker');
-  var calendar = generateCalendar(dp, [-1]);
-  calendar = $(calendar).addClass('modal-calendar');
-  $('.modal-body form #newTimeEntry').html(calendar);
-
-  $.ajax({
-    type: "GET",
-    url: "/dtx/app/getInputFields",
-    success: function (fields) {
-      var categories = fields.categories;
-      var projects = fields.projects;
-      $('#newCategory').html(getOptions(categories));
-      $('#newProject').html(getOptions(projects));
-      $('#newProject').trigger('change');
-    }
-  });
-});
-
-$('#newProject').change(function () {
-  var projectId = $('#newProject option:selected').val();
-  $.ajax({
-    type: "GET",
-    url: "/dtx/app/getInputFields",
-    data: {
-      "project": projectId
-    },
-    success: function (tasks) {
-      $('#newTask').html(getOptions(tasks));
-    }
-  });
-});
-
 function getOptions(obj) {
   var options = "";
   $.each(obj, function (key, val) {
@@ -134,44 +104,59 @@ function getOptions(obj) {
   return options;
 }
 
-$('#submitTimecard').click(function () {
-  var category = "";
-  var projectCode = "";
-  var projectTask = "";
-  var quantity = "";
-  var period = "";
-  var businessReason = "";
-  var hours = [ {"date":"", "quantity": 1} ];
-  $.ajax({
-    type: "POST",
-    url: '/dtx/app/addTimecard',
-    data: {
-      "category": category,
-      "projectCode": projectCode,
-      "projectTask": projectTask,
-      "quantity": quantity,
-      "period": period,
-      "businessReason": businessReason,
-      "hours": hours
-    },
-    success: function (data) {
-      console.log(data);
-      $('#newTimecardModal').modal('hide');
+function calculateHours(calendar, period) {
+  var hours = [];
+  calendar.each(function() {
+    var day = $(this).find('label').html();
+    var hour = $(this).find('input').val();
+    if (hour > 0) {
+      var date = period + "-" + day;
+      var arr = {};
+      arr["date"] = date;
+      arr["quantity"] = hour;
+      hours.push(arr);
     }
   });
+  return hours
+}
 
-})
+function getPeriod(dp) {
+  var period = new Date(dp.selectedDates);
+  var month = period.getMonth() + 1;
+  period = period.getFullYear() + "-" + month;
+  return period;
+}
+
+// Event Handlers
+
+$('#timecards').on('click', 'button', function () {
+  getTimecardDetails($(this).attr('id'));
+});
+
+$('#submitTimecard').click(function () {
+  addTimeCard();
+});
+
+$('#newTimecardModal').on('hide.bs.modal', function () {
+  $('#businessReason').val('');
+  $('#totalTime').val(0);
+});
+
+$('#newTimeEntry').on('change', 'input', function () {
+  var hours = calculateHours($('#newTimeEntry td'), "");
+  var total = 0;
+  for (var h in hours) {
+    total += Number(hours[h].quantity);
+  }
+  $('#totalTime').val(total);
+});
 
 // AJAX Requests
 
 /**
  * Get timecards for a specified period.
  */
-function getTimecards(dp) {
-  var period = new Date(dp.selectedDates);
-  var month = period.getMonth() + 1;
-  period = period.getFullYear() + "-" + month;
-  
+function getTimecards(period) {
   $.ajax({
     type : "GET",
     url : "/dtx/app/getTimecards",
@@ -204,8 +189,43 @@ function getTimecards(dp) {
   });
 }
 
-$('#timecards').on('click', 'button', function () {
-  var timecardId = $(this).attr('id');
+/**
+ * Adds a new timecard entry.
+ */
+function addTimeCard() {
+  var category = $('#newCategory').val();
+  var projectCode = $('#newProject').val();
+  var projectTask = $('#newTask').val();
+  var quantity = $('#totalTime').val();
+  var period = getPeriod($('#date').data('datepicker'));
+  var businessReason = $('#businessReason').val();
+  var hours = calculateHours($('#newTimeEntry td'), period);
+  if (hours.length > 0) {
+    $.ajax({
+      type: "POST",
+      url: '/dtx/app/addTimecard',
+      data: {
+        "category": category,
+        "projectCode": projectCode,
+        "projectTask": projectTask,
+        "quantity": quantity,
+        "period": period,
+        "businessReason": businessReason,
+        "hours": hours,
+        "days" : hours.length
+      },
+      success: function () {
+        $('#newTimecardModal').modal('hide');
+        getTimecards(period);
+      }
+    });
+  }
+}
+
+/**
+ * Gets details of selected timecard.
+ */
+function getTimecardDetails(timecardId) {
   $.ajax({
     type : "GET",
     url : "/dtx/app/getTimecardDetails",
@@ -216,32 +236,32 @@ $('#timecards').on('click', 'button', function () {
       var html =
           '<h4>Reference: 111</h4>' +
           '<form>' +
-            '<div class="input-group input-group-sm mb-1">' +
-              '<div class="input-group-prepend">' +
-                '<label class="input-group-text" for="category">Category</label>' +
-              '</div>' +
-              '<select class="form-control" aria-label="Category" id="category" disabled="disabled">' +
-                '<option>' + timecard['category']['name'] + '</option>' +
-              '</select>' +
-            '</div>' +
-            '<div class="input-group input-group-sm mb-1">' +
-              '<div class="input-group-prepend">' +
-                '<label class="input-group-text" for="project">Project</label>' +
-              '</div>' +
-              '<input type="text" class="form-control" aria-label="Project" id="project" value="' + timecard['project']['name'] + '" disabled="disabled"/>' +
-              '<div class="input-group-prepend">' +
-                '<label class="input-group-text" for="task">Task</label>' +
-              '</div>' +
-              '<select class="form-control" aria-label="Task" id="task" disabled="disabled">' +
-                '<option>' + timecard['project']['task'] + '</option>' +
-              '</select>' +
-            '</div>' +
-            '<div class="input-group input-group-sm mb-1">' +
-              '<div class="input-group-prepend">' +
-                '<label class="input-group-text" for="hours">Time Booked</label>' +
-              '</div>' +
-              '<input type="text" class="form-control" aria-label="Hours" id="hours" value="' + timecard['quantity'] + ' Hours" disabled="disabled"/>' +
-            '</div>' +
+          '<div class="input-group input-group-sm mb-1">' +
+          '<div class="input-group-prepend">' +
+          '<label class="input-group-text" for="category">Category</label>' +
+          '</div>' +
+          '<select class="form-control" aria-label="Category" id="category" disabled="disabled">' +
+          '<option>' + timecard['category']['name'] + '</option>' +
+          '</select>' +
+          '</div>' +
+          '<div class="input-group input-group-sm mb-1">' +
+          '<div class="input-group-prepend">' +
+          '<label class="input-group-text" for="project">Project</label>' +
+          '</div>' +
+          '<input type="text" class="form-control" aria-label="Project" id="project" value="' + timecard['project']['name'] + '" disabled="disabled"/>' +
+          '<div class="input-group-prepend">' +
+          '<label class="input-group-text" for="task">Task</label>' +
+          '</div>' +
+          '<select class="form-control" aria-label="Task" id="task" disabled="disabled">' +
+          '<option>' + timecard['project']['task'] + '</option>' +
+          '</select>' +
+          '</div>' +
+          '<div class="input-group input-group-sm mb-1">' +
+          '<div class="input-group-prepend">' +
+          '<label class="input-group-text" for="hours">Time Booked</label>' +
+          '</div>' +
+          '<input type="text" class="form-control" aria-label="Hours" id="hours" value="' + timecard['quantity'] + ' Hours" disabled="disabled"/>' +
+          '</div>' +
           '</form>';
       var dp = $('#date').data('datepicker');
       html += generateCalendar(dp, timecard['hours']);
@@ -258,47 +278,43 @@ $('#timecards').on('click', 'button', function () {
       $('#detail').html(html);
     }
   });
+}
+
+/**
+ * Get Project Tasks for a given project ID.
+ */
+$('#newProject').change(function () {
+  var projectId = $('#newProject option:selected').val();
+  $.ajax({
+    type: "GET",
+    url: "/dtx/app/getInputFields",
+    data: {
+      "project": projectId
+    },
+    success: function (tasks) {
+      $('#newTask').html(getOptions(tasks));
+    }
+  });
 });
 
 /**
- * Adds a new timecard entry.
+ * Get Time Categories and Projects for input fields on adding a new timecard.
  */
-function addTimeCard() {
-  var projectCode, projectTask, quantity, period, businessReason;
-  var xmlhttp;
-  xmlhttp = new XMLHttpRequest();
-  xmlhttp.onreadystatechange = function () {
-    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+$('#newTimecard').click(function () {
+  var dp = $('#date').data('datepicker');
+  var calendar = generateCalendar(dp, [-1]);
+  calendar = $(calendar).addClass('modal-calendar');
+  $('.modal-body form #newTimeEntry').html(calendar);
 
+  $.ajax({
+    type: "GET",
+    url: "/dtx/app/getInputFields",
+    success: function (fields) {
+      var categories = fields.categories;
+      var projects = fields.projects;
+      $('#newCategory').html(getOptions(categories));
+      $('#newProject').html(getOptions(projects));
+      $('#newProject').trigger('change');
     }
-  };
-  xmlhttp.open("post", "/dtx/app/addTimecard", true);
-  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xmlhttp.send("projectCode=" + projectCode
-      + "&projectTask=" + projectTask
-      + "&quantity=" + quantity
-      + "&period=" + period
-      + "&businessReason=" + businessReason);
-}
-
-/**
- * Gets details of selected timecard.
- */
-function getTimecardDetails() {
-  "use strict";
-  var timecardId;
-  var xmlhttp;
-  if (timecardId === "") {
-    // display error
-  } else {
-    xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-        //$('tbody').html(xmlhttp.responseText);
-        // display timecard details
-      }
-    };
-    xmlhttp.open("get", "/dtx/app/getTimecard?TimecardId=" + timecardId, true);
-    xmlhttp.send();
-  }
-}
+  });
+});

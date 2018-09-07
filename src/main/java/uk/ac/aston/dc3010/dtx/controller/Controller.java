@@ -6,7 +6,7 @@ import uk.ac.aston.dc3010.dtx.dao.ProjectDAO;
 import uk.ac.aston.dc3010.dtx.dao.TimecardDAO;
 import uk.ac.aston.dc3010.dtx.dao.UserDAO;
 import uk.ac.aston.dc3010.dtx.model.User;
-import uk.ac.aston.dc3010.dtx.timecard.Timecard;
+import uk.ac.aston.dc3010.dtx.timecard.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -97,8 +97,33 @@ public class Controller extends HttpServlet {
         }
         break;
       case "/app/addTimecard":
-        for (String s : new ArrayList<String>(req.getParameterMap().keySet())) {
-          System.out.println(s);
+        int cat = Integer.parseInt(req.getParameter("category"));
+        int pCode = Integer.parseInt(req.getParameter("projectCode"));
+        int task = Integer.parseInt(req.getParameter("projectTask"));
+        float quantity = Float.parseFloat(req.getParameter("quantity"));
+        String newPeriod = req.getParameter("period");
+        String businessReason = req.getParameter("businessReason");
+
+        Category category = new Category(cat);
+        Project project = new Project(pCode, task);
+        Timecard tc = new Timecard(category, project, quantity, Status.APPROVED);
+        List<Hours> hours = new ArrayList<>();
+        int days = Integer.parseInt(req.getParameter("days"));
+        for (int i = 0; i < days; i++) {
+          String hourParam = "hours[" + i + "]";
+          String date = req.getParameter(hourParam + "[date]");
+          float booked = Float.parseFloat(req.getParameter(hourParam + "[quantity]"));
+          hours.add(new Hours(date, booked));
+        }
+        tc.setHours(hours);
+
+        if (businessReason != "") {
+          tc.setBusinessReason(businessReason);
+        }
+
+        if (cat > 0 && pCode > 0 && task > 0 && quantity > 0) {
+          TimecardDAO timecardDAO = new TimecardDAO();
+          timecardDAO.addTimecard(user.getId(), newPeriod, tc);
         }
         break;
       default:

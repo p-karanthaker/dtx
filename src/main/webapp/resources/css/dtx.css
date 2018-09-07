@@ -6,11 +6,11 @@
 
 body,html {
   font-family: Ubuntu,Verdana,sans-serif;
+  height: 100%;
 }
 
 body {
-  padding-top: 100px;
-  padding-bottom: 100px
+  padding: 100px 0px;
 }
 
 :root {
@@ -142,9 +142,6 @@ body {
 }
 
 @media only screen and (max-width: 991px) {
-  .scrollable-cards {
-    height:50%
-  }
 }
 
 @media only screen and (max-width: 640px) {
@@ -159,8 +156,8 @@ body {
   }
 }
 
-@media only screen and (max-width: 462px) {
+@media only screen and (max-width: 487px) {
   body {
-    padding-top:160px
+    padding-top:180px
   }
 }
