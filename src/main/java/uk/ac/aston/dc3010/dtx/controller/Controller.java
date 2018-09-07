@@ -127,7 +127,7 @@ public class Controller extends HttpServlet {
         }
         break;
       default:
-        System.out.println("Hello");
+        resp.sendRedirect(contextPath + "/error.jspx");
         break;
     }
   }

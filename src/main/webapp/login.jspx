@@ -10,7 +10,7 @@
       <link href="/resources/css/signin.css" rel="stylesheet"/>
     </jsp:element>
     <jsp:element name="body">
-      <div class="text-center">
+      <div class="text-center px-1">
         <form class="form-signin" method="post" action="http://localhost:8080/dtx/login">
           <img class="mb-4" src="/resources/images/capgemini-logo.png" alt="" width="200"/>
           <h1 class="h3 mb-3 font-weight-normal">Sign in to DTX</h1>
@@ -25,7 +25,7 @@
         </form>
 
         <div class="alert alert-danger" role="alert">
-          <h4 class="alert-heading">WARNING!</h4>
+          <h2 class="alert-heading">WARNING!</h2>
           <p>The DTX system provides access to Personal Data as defined by the Data Protection Act. Access to this information
             is provided to users to view or update their own timecard and expense details. Under no circumstances should you
             attempt to access another person's data, unless express authority is granted by the management of Capgemini. Abuse

@@ -1,0 +1,40 @@
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" xmlns="http://www.w3.org/1999/xhtml" version="2.0">
+  <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+  <jsp:element name="html">
+    <jsp:attribute name="lang">EN</jsp:attribute>
+
+    <jsp:element name="head">
+      <title>Page Not Found</title>
+
+      <jsp:include page="core.jspx"/>
+    </jsp:element>
+    <jsp:element name="body">
+      <style>
+        body {
+          align-items: center;
+          display: flex;
+        }
+
+        .btn-primary {
+          color: #fff;
+          background-color: #0070ad;
+          border-color: #12abdb;
+        }
+
+        .btn-primary:hover {
+          color: #fff;
+          background-color: #12abdb;
+        }
+      </style>
+      <div class="text-center px-1" style="width: 100%">
+        <div class="alert alert-danger" role="alert">
+          <h1 class="alert-heading">Page Not Found!</h1>
+          <p>The page you were looking for could not be found.</p>
+          <form action="index.jspx">
+            <button type="submit" class="btn btn-primary">Go Home</button>
+          </form>
+        </div>
+      </div>
+    </jsp:element>
+  </jsp:element>
+</jsp:root>
