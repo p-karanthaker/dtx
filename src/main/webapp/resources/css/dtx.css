@@ -8,10 +8,6 @@ body,html {
   font-family: Ubuntu,Verdana,sans-serif;
 }
 
-.calendar-header>tr,.weekdays tr {
-  text-align: center
-}
-
 body {
   padding-top: 100px;
   padding-bottom: 100px
@@ -22,26 +18,32 @@ body {
 
 .btn-primary {
   color: #fff;
+  background-color: #0070ad; /* Fallback for IE */
   background-color: var(--primary-blue);
-  border-color: var(--secondary-blue)
+  border-color: #12abdb; /* Fallback for IE */
+  border-color: var(--secondary-blue);
 }
 
 .btn-outline-primary,.btn-outline-primary:hover,.btn-primary:hover {
-  border-color: var(--primary-blue)
+  border-color: #0070ad; /* Fallback for IE */
+  border-color: var(--primary-blue);
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: var(--secondary-blue)
+  background-color: #12abdb; /* Fallback for IE */
+  background-color: var(--secondary-blue);
 }
 
 .btn-outline-primary {
+  color: #0070ad; /* Fallback for IE */
   color: var(--primary-blue);
   background-color: transparent;
   background-image: none
 }
 
 .btn-outline-primary:hover,.calendar-header>tr {
+  background-color: #0070ad; /* Fallback for IE */
   background-color: var(--primary-blue);
   color: #fff
 }
@@ -93,6 +95,14 @@ body {
 .calendar-table {
   font-size: 10pt;
   width: 50%
+}
+
+.modal-calendar {
+  width: 100%;
+}
+
+.calendar-header>tr,.weekdays tr {
+  text-align: center
 }
 
 .weekdays td {

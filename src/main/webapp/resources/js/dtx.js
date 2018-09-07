@@ -77,9 +77,9 @@ function generateCalendar(dp, hours) {
       var tempCell;
       var label = "day-" + day;
       for (var entry in hours) {
-        var date = new Date(entry['date']).getDate();
+        var date = new Date(hours[entry]['date']).getDate();
         if (day == date) {
-          tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" value="'+ entry['quantity'] +'" id="' + label + '"/></td>';
+          tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" value="'+ hours[entry]['quantity'] +'" id="' + label + '"/></td>';
           break;
         } else {
           tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" id="' + label + '"/></td>';
@@ -92,6 +92,50 @@ function generateCalendar(dp, hours) {
   }
   return calendar.html();
 }
+
+$('#newTimecard').click(function () {
+  var dp = $('#date').data('datepicker');
+  var calendar = generateCalendar(dp, [-1]);
+  calendar = $(calendar).addClass('modal-calendar');
+  $('.modal-body form #newTimeEntry').html(calendar);
+
+  $.ajax({
+    type: "GET",
+    url: "/dtx/getInputFields",
+    success: function (fields) {
+      console.log(fields);
+    }
+  });
+
+})
+
+$('#submitTimecard').click(function () {
+  var category = "";
+  var projectCode = "";
+  var projectTask = "";
+  var quantity = "";
+  var period = "";
+  var businessReason = "";
+  var hours = [ {"date":"", "quantity": 1} ];
+  $.ajax({
+    type: "POST",
+    url: '/dtx/app/addTimecard',
+    data: {
+      "category": category,
+      "projectCode": projectCode,
+      "projectTask": projectTask,
+      "quantity": quantity,
+      "period": period,
+      "businessReason": businessReason,
+      "hours": hours
+    },
+    success: function (data) {
+      console.log(data);
+      $('#newTimecardModal').modal('hide');
+    }
+  });
+
+})
 
 // AJAX Requests
 

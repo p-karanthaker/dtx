@@ -20,18 +20,26 @@ body {
 }
 
 :root {
-  --primary-blue:#0070ad;--secondary-blue:#12abdb;--primary-opacity-95:rgba(0, 112, 173, 0.95);--secondary-opacity-95:rgba(18, 171, 219, 0.95)}
+  --primary-blue:#0070ad;
+  --secondary-blue:#12abdb;
+  --primary-opacity-95:rgba(0, 112, 173, 0.95);
+  --secondary-opacity-95:rgba(18, 171, 219, 0.95)
+}
 
 .btn-primary {
   color: #fff;
+  background-color: #0070ad; /* Fallback for IE */
   background-color: var(--primary-blue);
-  border-color: var(--secondary-blue)
+  border-color: #12abdb; /* Fallback for IE */
+  border-color: var(--secondary-blue);
 }
 
 .btn-primary:hover {
   color: #fff;
+  background-color: #0070ad; /* Fallback for IE */
   background-color: var(--secondary-blue);
-  border-color: var(--primary-blue)
+  border-color: #12abdb; /* Fallback for IE */
+  border-color: var(--primary-blue);
 }
 
 .form-signin {
