@@ -101,13 +101,38 @@ $('#newTimecard').click(function () {
 
   $.ajax({
     type: "GET",
-    url: "/dtx/getInputFields",
+    url: "/dtx/app/getInputFields",
     success: function (fields) {
-      console.log(fields);
+      var categories = fields.categories;
+      var projects = fields.projects;
+      $('#newCategory').html(getOptions(categories));
+      $('#newProject').html(getOptions(projects));
+      $('#newProject').trigger('change');
     }
   });
+});
 
-})
+$('#newProject').change(function () {
+  var projectId = $('#newProject option:selected').val();
+  $.ajax({
+    type: "GET",
+    url: "/dtx/app/getInputFields",
+    data: {
+      "project": projectId
+    },
+    success: function (tasks) {
+      $('#newTask').html(getOptions(tasks));
+    }
+  });
+});
+
+function getOptions(obj) {
+  var options = "";
+  $.each(obj, function (key, val) {
+    options += $('<option></option>').val(key).html(val).prop('outerHTML');
+  });
+  return options;
+}
 
 $('#submitTimecard').click(function () {
   var category = "";

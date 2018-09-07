@@ -106,7 +106,7 @@
                           <label class="input-group-text" for="newCategory">Category</label>
                         </div>
                         <select class="form-control" aria-label="New Category" id="newCategory">
-                          <option>A category</option>
+                          <!-- dynamic categories -->
                         </select>
                       </div>
                       <div class="input-group input-group-sm mb-2">
@@ -114,7 +114,7 @@
                           <label class="input-group-text" for="newProject">Project</label>
                         </div>
                         <select class="form-control" aria-label="New Project" id="newProject">
-                          <option>A project</option>
+                          <!-- dynamic projects -->
                         </select>
                       </div>
                       <div class="input-group input-group-sm mb-2">
@@ -122,7 +122,7 @@
                           <label class="input-group-text" for="newTask">Task</label>
                         </div>
                         <select class="form-control" aria-label="New Task" id="newTask">
-                          <option>1</option>
+                          <!-- dynamic tasks -->
                         </select>
                       </div>
                       <div id="newTimeEntry"><!-- Calendar generation --></div>

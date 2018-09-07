@@ -1,6 +1,8 @@
 package uk.ac.aston.dc3010.dtx.controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import uk.ac.aston.dc3010.dtx.dao.ProjectDAO;
 import uk.ac.aston.dc3010.dtx.dao.TimecardDAO;
 import uk.ac.aston.dc3010.dtx.dao.UserDAO;
 import uk.ac.aston.dc3010.dtx.model.User;
@@ -13,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Controller extends HttpServlet {
 
@@ -69,6 +73,32 @@ public class Controller extends HttpServlet {
           new Gson().toJson(toReturn, resp.getWriter());
         } else {
           new Gson().toJson("error: 'No details found'", resp.getWriter());
+        }
+        break;
+      case "/app/getInputFields":
+        resp.setContentType("application/json");
+        String param = req.getParameter("project");
+        int projectId = 0;
+        if (param != null) {
+          projectId = Integer.parseInt(param);
+        }
+        ProjectDAO projectDAO = new ProjectDAO();
+        if (projectId > 0) {
+          new Gson().toJson(projectDAO.getProjectTasks(projectId), resp.getWriter());
+        } else {
+          Map<Integer, String> categories = projectDAO.getDetails("time_category");
+          Map<Integer, String> projects = projectDAO.getDetails("project_code");
+          JsonObject categoryJson = new Gson().toJsonTree(categories).getAsJsonObject();
+          JsonObject projectJson = new Gson().toJsonTree(projects).getAsJsonObject();
+          JsonObject merged = new JsonObject();
+          merged.add("categories", categoryJson);
+          merged.add("projects", projectJson);
+          new Gson().toJson(merged, resp.getWriter());
+        }
+        break;
+      case "/app/addTimecard":
+        for (String s : new ArrayList<String>(req.getParameterMap().keySet())) {
+          System.out.println(s);
         }
         break;
       default:
