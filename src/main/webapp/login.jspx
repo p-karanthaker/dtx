@@ -15,7 +15,7 @@
           <img class="mb-4" src="/resources/images/capgemini-logo.png" alt="" width="200"/>
           <h1 class="h3 mb-3 font-weight-normal">Sign in to DTX</h1>
           <label for="inputEmail" class="sr-only">CORP Username</label>
-          <input name="username" type="text" id="inputEmail" class="form-control" placeholder="CORP\Username"
+          <input name="username" type="text" id="inputEmail" class="form-control" placeholder="CORP\\Username"
                  required="required"
                  autofocus="autofocus"/>
           <label for="inputPassword" class="sr-only">Password</label>
