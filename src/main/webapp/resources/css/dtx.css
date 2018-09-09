@@ -48,6 +48,10 @@ body {
   color: #fff
 }
 
+.btn-group>button:last-of-type {
+  border-right: none;
+}
+
 .card-body {
   line-height: 1em
 }
@@ -57,7 +61,7 @@ body {
   border-top-right-radius: 0;
   border-top: 1px solid rgba(0,0,0,.125);
   border-left: none;
-  border-right: none;
+  border-right: 1px solid rgba(0,0,0,.125);
   border-bottom: none
 }
 

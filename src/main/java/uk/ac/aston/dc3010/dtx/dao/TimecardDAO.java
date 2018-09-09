@@ -145,7 +145,7 @@ public class TimecardDAO {
         for (String q : queries) {
           final PreparedStatement ps = connection.prepareStatement(q);
           ps.setInt(1, timecardId);
-          ps.executeQuery();
+          ps.executeUpdate();
         }
         return true;
       }

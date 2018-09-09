@@ -130,7 +130,20 @@ function getPeriod(dp) {
 // Event Handlers
 
 $('#timecards').on('click', 'button', function () {
-  getTimecardDetails($(this).attr('id'));
+  var action = $(this).attr('data-action');
+  var id = $(this).attr('data-timecard-id');
+  if (action === "details") {
+    getTimecardDetails(id);
+  } else if (action === "edit") {
+    //
+  } else if (action === "delete") {
+    var del = confirm("Are you sure you want to delete this timecard?");
+    if (del == true) {
+      deleteTimecard(id);
+    } else {
+      // Do nothing.
+    }
+  }
 });
 
 $('#submitTimecard').click(function () {
@@ -180,7 +193,11 @@ function getTimecards(period) {
               '<b>Task: </b>' + entry.project.task + '<br/>' +
               '<b>Quantity: </b>' + entry.quantity + ' hours<br/>' +
               '</div>' +
-              '<button class="btn btn-sm btn-outline-primary time-button" id="' + entry.id + '">Details</button>' +
+              '<div class="btn-group d-flex" role="group" aria-label="Timecard Actions">' +
+              '<button class="btn btn-sm btn-outline-primary time-button w-100" data-timecard-id="' + entry.id + '" data-action="details">Details</button>' +
+              '<button class="btn btn-sm btn-outline-primary time-button w-100" data-timecard-id="' + entry.id + '" data-action="edit">Edit</button>' +
+              '<button class="btn btn-sm btn-outline-primary time-button w-100" data-timecard-id="' + entry.id + '" data-action="delete">Delete</button>' +
+              '</div>' +
               '</div>';
         });
       }
@@ -280,6 +297,19 @@ function getTimecardDetails(timecardId) {
   });
 }
 
+function deleteTimecard(timecardId) {
+  $.ajax({
+    type: "GET",
+    url: "/dtx/app/deleteTimecard",
+    data: {
+      "id": timecardId
+    },
+    success: function () {
+      getTimecards(getPeriod($('#date').data('datepicker')));
+    }
+  });
+}
+
 /**
  * Get Project Tasks for a given project ID.
  */
@@ -301,6 +331,8 @@ $('#newProject').change(function () {
  * Get Time Categories and Projects for input fields on adding a new timecard.
  */
 $('#newTimecard').click(function () {
+  $('#modalTitle').html('New Time Card');
+
   var dp = $('#date').data('datepicker');
   var calendar = generateCalendar(dp, [-1]);
   calendar = $(calendar).addClass('modal-calendar');

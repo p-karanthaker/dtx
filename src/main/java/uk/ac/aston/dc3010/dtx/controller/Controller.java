@@ -24,8 +24,13 @@ public class Controller extends HttpServlet {
   private User user = null;
   private List<Timecard> cards = new ArrayList<>();
   private HttpSession session;
+  private TimecardDAO timecardDAO;
+  private ProjectDAO projectDAO;
 
-  public void init() {}
+  public void init() {
+    timecardDAO = new TimecardDAO();
+    projectDAO = new ProjectDAO();
+  }
 
   public void destroy() {}
 
@@ -55,8 +60,7 @@ public class Controller extends HttpServlet {
         break;
       case "/app/getTimecards":
         String period = req.getParameter("period");
-        TimecardDAO dao = new TimecardDAO();
-        cards = dao.getTimecards(user.getId(), period);
+        cards = timecardDAO.getTimecards(user.getId(), period);
         resp.setContentType("application/json");
         new Gson().toJson(cards, resp.getWriter());
         break;
@@ -82,7 +86,6 @@ public class Controller extends HttpServlet {
         if (param != null) {
           projectId = Integer.parseInt(param);
         }
-        ProjectDAO projectDAO = new ProjectDAO();
         if (projectId > 0) {
           new Gson().toJson(projectDAO.getProjectTasks(projectId), resp.getWriter());
         } else {
@@ -122,9 +125,12 @@ public class Controller extends HttpServlet {
         }
 
         if (cat > 0 && pCode > 0 && task > 0 && quantity > 0) {
-          TimecardDAO timecardDAO = new TimecardDAO();
           timecardDAO.addTimecard(user.getId(), newPeriod, tc);
         }
+        break;
+      case "/app/deleteTimecard":
+        int timecardId = Integer.parseInt(req.getParameter("id"));
+        timecardDAO.deleteTimecard(timecardId);
         break;
       default:
         resp.sendRedirect(contextPath + "/error.jspx");
