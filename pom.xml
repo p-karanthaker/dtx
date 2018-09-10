@@ -62,7 +62,7 @@
     <plugin>
       <groupId>org.apache.tomcat.maven</groupId>
       <artifactId>tomcat7-maven-plugin</artifactId>
-      <version>2.2</version>
+      <version>2.1</version>
       <configuration>
         <uriEncoding>UTF-8</uriEncoding>
         <path>/</path>
@@ -71,4 +71,37 @@
     </plugin>
     </plugins>
   </build>
+  
+  <profiles>
+    <profile>
+      <id>runnable-war</id>
+      <build>
+        <finalName>dtx</finalName>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.1</version>
+            <executions>
+              <execution>
+                <id>tomcat-run</id>
+                <goals>
+                  <goal>exec-war-only</goal>
+                </goals>
+                <phase>package</phase>
+                <configuration>
+                  <uriEncoding>UTF-8</uriEncoding>
+                  <path>/</path>
+                  <update>true</update>
+                  <attachartifactclassifier>exec-war</attachartifactclassifier>
+                  <attachartifactclassifiertype>jar</attachartifactclassifiertype>
+                  <enableNaming>true</enableNaming>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>
