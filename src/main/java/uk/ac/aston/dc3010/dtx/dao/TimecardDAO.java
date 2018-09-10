@@ -10,9 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TimecardDAO {
 
@@ -141,7 +139,7 @@ public class TimecardDAO {
       if (connection != null) {
         final String query = "DELETE FROM timecard_hours WHERE timecard = ?";
         final String query2 = "DELETE FROM timecard WHERE id = ?";
-        String[] queries = { query, query2 };
+        String[] queries = {query, query2};
         for (String q : queries) {
           final PreparedStatement ps = connection.prepareStatement(q);
           ps.setInt(1, timecardId);

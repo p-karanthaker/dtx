@@ -1,7 +1,5 @@
 package uk.ac.aston.dc3010.dtx.dao;
 
-import uk.ac.aston.dc3010.dtx.model.User;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
@@ -9,9 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ProjectDAO {
@@ -73,5 +69,4 @@ public class ProjectDAO {
 
     return tasks;
   }
-
 }

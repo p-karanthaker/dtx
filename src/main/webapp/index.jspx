@@ -90,7 +90,8 @@
                     aria-label="New Time Card" data-toggle="modal" data-target="#newTimecardModal">New Time Card
             </button>
 
-            <div class="modal fade" id="newTimecardModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal fade" id="newTimecardModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
+                 aria-hidden="true">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -130,11 +131,13 @@
                         <div class="input-group-prepend">
                           <label class="input-group-text" for="totalTime">Total (Hours)</label>
                         </div>
-                        <input type="text" class="form-control" aria-label="Total Time" id="totalTime" value="0" disabled="disabled"/>
+                        <input type="text" class="form-control" aria-label="Total Time" id="totalTime" value="0"
+                               disabled="disabled"/>
                       </div>
                       <div class="form-group mt-2">
                         <label for="businessReason">Business Reason</label>
-                        <textarea class="form-control" id="businessReason" name="Business Reason" placeholder="Enter business reason if required"><!-- Empty --></textarea>
+                        <textarea class="form-control" id="businessReason" name="Business Reason"
+                                  placeholder="Enter business reason if required"><!-- Empty --></textarea>
                       </div>
                     </form>
                   </div>

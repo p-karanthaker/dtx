@@ -1,3 +1,5 @@
+/** Developed by Prem-Karan Thaker **/
+
 $(document).ready(function () {
   var dp = $('#date').datepicker({
     autoClose: true,
@@ -58,7 +60,7 @@ function toggleDate(previous, dp) {
  */
 function generateCalendar(dp, hours) {
   var currentDate = new Date(dp.selectedDates);
-  var days = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0).getDate();
+  var days = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
   var start = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
 
   var calendar = $('<div><table class="calendar-table">' +
@@ -67,25 +69,24 @@ function generateCalendar(dp, hours) {
 
   var tbody = $('.weekdays', calendar)[0];
   var i;
-  for (i = 1; i<36; i++)
-  {
+  for (i = 1; i < 36; i++) {
     if (i % 7 == 1) {
       var newRow = tbody.insertRow(tbody.rows.length);
     }
     var newCell = newRow.insertCell(-1);
     if (i >= start && i < days + start) {
       var day = i - start + 1;
-      day = ('0'+day).slice(-2);
+      day = ('0' + day).slice(-2);
 
       var tempCell;
       var label = "day-" + day;
       for (var entry in hours) {
         var date = new Date(hours[entry].date).getDate();
         if (day == date) {
-          tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" value="'+ hours[entry].quantity +'" id="' + label + '"/></td>';
+          tempCell = '<td><label for="' + label + '">' + day + '</label><br/><input type="text" value="' + hours[entry].quantity + '" id="' + label + '"/></td>';
           break;
         } else {
-          tempCell = '<td><label for="' + label + '">'+ day + '</label><br/><input type="text" id="' + label + '"/></td>';
+          tempCell = '<td><label for="' + label + '">' + day + '</label><br/><input type="text" id="' + label + '"/></td>';
         }
       }
       newCell.innerHTML = tempCell;
@@ -106,7 +107,7 @@ function getOptions(obj) {
 
 function calculateHours(calendar, period) {
   var hours = [];
-  calendar.each(function() {
+  calendar.each(function () {
     var day = $(this).find('label').html();
     var hour = $(this).find('input').val();
     if (hour > 0) {
@@ -171,12 +172,12 @@ $('#newTimeEntry').on('change', 'input', function () {
  */
 function getTimecards(period) {
   $.ajax({
-    type : "GET",
-    url : "/dtx/app/getTimecards",
-    data : {
-      "period" : period
+    type: "GET",
+    url: "/dtx/app/getTimecards",
+    data: {
+      "period": period
     },
-    success : function (timecards) {
+    success: function (timecards) {
       var html = "";
       if (!$.isArray(timecards) || !timecards.length) {
         html = "Nothing to display.";
@@ -229,7 +230,7 @@ function addTimeCard() {
         "period": period,
         "businessReason": businessReason,
         "hours": hours,
-        "days" : hours.length
+        "days": hours.length
       },
       success: function () {
         $('#newTimecardModal').modal('hide');
@@ -244,12 +245,12 @@ function addTimeCard() {
  */
 function getTimecardDetails(timecardId) {
   $.ajax({
-    type : "GET",
-    url : "/dtx/app/getTimecardDetails",
-    data : {
-      "id" : timecardId
+    type: "GET",
+    url: "/dtx/app/getTimecardDetails",
+    data: {
+      "id": timecardId
     },
-    success : function (timecard) {
+    success: function (timecard) {
       var html =
           '<h4>Reference: ' + timecard.id + '</h4>' +
           '<form>' +

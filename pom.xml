@@ -21,12 +21,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>jstl</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.apache.tomcat</groupId>
       <artifactId>servlet-api</artifactId>
       <version>6.0.53</version>
