@@ -26,6 +26,13 @@ public class TimecardDAO {
     }
   }
 
+  /**
+   * Add a new timecard to the database.
+   *
+   * @param employeeId the employee who is adding the timecard.
+   * @param period the period this timecard is for.
+   * @param tc the timecard object to insert into the database.
+   */
   public void addTimecard(int employeeId, String period, Timecard tc) {
     if (tc.getHours().isEmpty()) {
       System.out.println("Empty hours");
@@ -76,6 +83,13 @@ public class TimecardDAO {
     }
   }
 
+  /**
+   * Retrieve timecards for an employee in a given period.
+   *
+   * @param employeeId the employee whose timecards are being retrieved.
+   * @param period the period in which to find timecards.
+   * @return a List of Timecard objects.
+   */
   public List<Timecard> getTimecards(int employeeId, String period) {
     final List<Timecard> timecards = new ArrayList<>();
     try (Connection connection = dataSource.getConnection()) {
@@ -134,6 +148,12 @@ public class TimecardDAO {
     return timecards;
   }
 
+  /**
+   * Removes a timecard for a user from the database.
+   *
+   * @param timecardId the id of the timecard to remove.
+   * @return true if the delete is successful.
+   */
   public boolean deleteTimecard(int timecardId) {
     try (Connection connection = dataSource.getConnection()) {
       if (connection != null) {

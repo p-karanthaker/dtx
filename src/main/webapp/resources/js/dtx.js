@@ -1,5 +1,8 @@
 /** Developed by Prem-Karan Thaker **/
 
+/**
+ * Initialise the datepicker for selecting time Periods one the page is loaded.
+ */
 $(document).ready(function () {
   var dp = $('#date').datepicker({
     autoClose: true,
@@ -27,10 +30,14 @@ $(document).ready(function () {
   });
 });
 
+/* Toggle the information panel when button is clicked. */
 $('#mySidenav').click(function () {
   toggleNav();
 });
 
+/**
+ * Toggles the side information panel. Brings it in and out of view on the screen.
+ */
 function toggleNav() {
   var nav = document.getElementById("mySidenav");
   if (parseInt(nav.style.width) > 0) {
@@ -40,6 +47,11 @@ function toggleNav() {
   }
 }
 
+/**
+ * Changes the month value in Period by +1 or -1 based on whether user selects previous or next.
+ * @param previous the user selected previous
+ * @param dp the datepicker object to get the currently selected Period.
+ */
 function toggleDate(previous, dp) {
   var currentDate = new Date(dp.selectedDates);
   var month = currentDate.getMonth();
@@ -97,6 +109,11 @@ function generateCalendar(dp, hours) {
   return calendar.html();
 }
 
+/**
+ * Generates options for a <select> element using a key-value pair.
+ * @param obj the key-value pair to create options from
+ * @returns {string}
+ */
 function getOptions(obj) {
   var options = "";
   $.each(obj, function (key, val) {
@@ -105,6 +122,12 @@ function getOptions(obj) {
   return options;
 }
 
+/**
+ * Totals the time entered when adding a new timecard.
+ * @param calendar the calendar to calculate time from.
+ * @param period the currently selected Period.
+ * @returns {Array}
+ */
 function calculateHours(calendar, period) {
   var hours = [];
   calendar.each(function () {
@@ -121,6 +144,11 @@ function calculateHours(calendar, period) {
   return hours
 }
 
+/**
+ * Gets the currently selected period in the format YYYY-MM
+ * @param dp the datepicker object to find the current date.
+ * @returns {string|Date}
+ */
 function getPeriod(dp) {
   var period = new Date(dp.selectedDates);
   var month = period.getMonth() + 1;
@@ -130,6 +158,12 @@ function getPeriod(dp) {
 
 // Event Handlers
 
+/**
+ * Performs an action based on which button was clicked on a Timecard.
+ * Details: displays the timecard details.
+ * Edit: Allows user to edit the timecard details.
+ * Delete: Removes the timecard.
+ */
 $('#timecards').on('click', 'button', function () {
   var action = $(this).attr('data-action');
   var id = $(this).attr('data-timecard-id');
@@ -147,15 +181,24 @@ $('#timecards').on('click', 'button', function () {
   }
 });
 
+/**
+ * Displays dialog to add a new timecard when button is clicked.
+ */
 $('#submitTimecard').click(function () {
   addTimeCard();
 });
 
+/**
+ * Resets values in timecard creation dialog when the dialog is dismissed.
+ */
 $('#newTimecardModal').on('hide.bs.modal', function () {
   $('#businessReason').val('');
   $('#totalTime').val(0);
 });
 
+/**
+ * Performs live updates to total time booked as user enters time into a new Timecard.
+ */
 $('#newTimeEntry').on('change', 'input', function () {
   var hours = calculateHours($('#newTimeEntry td'), "");
   var total = 0;

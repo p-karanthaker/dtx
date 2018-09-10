@@ -10,6 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Data Access Object class for the employee database table.
+ *
+ * <p>Authenticates a user and provides a User object to use for sessions.
+ */
 public class UserDAO {
 
   private DataSource dataSource = null;
@@ -26,6 +31,13 @@ public class UserDAO {
     }
   }
 
+  /**
+   * Authenticate a user using the provided username and password.
+   *
+   * @param username the username of the user.
+   * @param password the password of the user.
+   * @return true if credentials are valid.
+   */
   public boolean authenticate(String username, String password) {
     try (Connection connection = dataSource.getConnection()) {
       if (connection != null) {
@@ -60,6 +72,11 @@ public class UserDAO {
     return false;
   }
 
+  /**
+   * Get the User object.
+   *
+   * @return a User object to use in a session.
+   */
   public User getUser() {
     return user;
   }

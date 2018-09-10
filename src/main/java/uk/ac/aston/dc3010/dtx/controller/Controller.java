@@ -41,7 +41,7 @@ public class Controller extends HttpServlet {
     session = req.getSession(true);
 
     switch (action) {
-      case "/login":
+      case "/login": // Authenticate a user.
         final String username = req.getParameter("username");
         final String password = req.getParameter("password");
         UserDAO userDAO = new UserDAO();
@@ -53,17 +53,17 @@ public class Controller extends HttpServlet {
           resp.sendRedirect(contextPath + "/login.jspx");
         }
         break;
-      case "/app/logout":
+      case "/app/logout": // Log a user out of the application.
         session.invalidate();
         resp.sendRedirect(contextPath + "/login.jspx");
         break;
-      case "/app/getTimecards":
+      case "/app/getTimecards": // Return a list of timecards for a user in a given period.
         String period = req.getParameter("period");
         cards = timecardDAO.getTimecards(user.getId(), period);
         resp.setContentType("application/json");
         new Gson().toJson(cards, resp.getWriter());
         break;
-      case "/app/getTimecardDetails":
+      case "/app/getTimecardDetails": // Return the details of a given timecard.
         int id = Integer.parseInt(req.getParameter("id"));
         Timecard toReturn = null;
         for (Timecard card : cards) {
@@ -78,7 +78,8 @@ public class Controller extends HttpServlet {
           new Gson().toJson("error: 'No details found'", resp.getWriter());
         }
         break;
-      case "/app/getInputFields":
+      case "/app/getInputFields": // Return the input fields required for a user form to fill out
+                                  // new timecards
         resp.setContentType("application/json");
         String param = req.getParameter("project");
         int projectId = 0;
@@ -98,7 +99,7 @@ public class Controller extends HttpServlet {
           new Gson().toJson(merged, resp.getWriter());
         }
         break;
-      case "/app/addTimecard":
+      case "/app/addTimecard": // Adds a user submitted timecard form to the database
         int cat = Integer.parseInt(req.getParameter("category"));
         int pCode = Integer.parseInt(req.getParameter("projectCode"));
         int task = Integer.parseInt(req.getParameter("projectTask"));
@@ -127,7 +128,7 @@ public class Controller extends HttpServlet {
           timecardDAO.addTimecard(user.getId(), newPeriod, tc);
         }
         break;
-      case "/app/deleteTimecard":
+      case "/app/deleteTimecard": // Removes a given timecard for the user.
         int timecardId = Integer.parseInt(req.getParameter("id"));
         timecardDAO.deleteTimecard(timecardId);
         break;

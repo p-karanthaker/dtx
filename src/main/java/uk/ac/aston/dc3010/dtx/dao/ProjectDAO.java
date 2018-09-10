@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+/** Data Access Object class for the tables relating to projects in the database. */
 public class ProjectDAO {
 
   private DataSource dataSource = null;
@@ -24,6 +25,12 @@ public class ProjectDAO {
     }
   }
 
+  /**
+   * Get the id and name columns from a given table.
+   *
+   * @param table the table to retrieve columns from.
+   * @return a Map mapping an id to a name.
+   */
   public Map<Integer, String> getDetails(String table) {
     Map<Integer, String> details = new HashMap<>();
 
@@ -46,6 +53,12 @@ public class ProjectDAO {
     return details;
   }
 
+  /**
+   * Get the Tasks related to a given project.
+   *
+   * @param projectId the id of the project to retrieve tasks for.
+   * @return a Map mapping task IDs to task names.
+   */
   public Map<Integer, String> getProjectTasks(int projectId) {
     Map<Integer, String> tasks = new HashMap<>();
 

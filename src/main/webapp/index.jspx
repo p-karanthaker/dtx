@@ -59,6 +59,7 @@
 
         <div class="row">
           <div class="col-lg-4">
+            <!-- Time Period Selection Form -->
             <form>
               <div class="input-group mb-3 input-group-sm">
                 <div class="input-group-prepend">
@@ -83,13 +84,18 @@
                 </div>
               </div>
             </form>
+
+            <!-- Timecard List (Dynamically added to based on Period selection) -->
             <div class="scrollable-cards" id="timecards">
               Nothing to display
             </div>
+
+            <!-- Button to add new Timecards -->
             <button class="btn btn-primary" id="newTimecard" style="width: 100%;"
                     aria-label="New Time Card" data-toggle="modal" data-target="#newTimecardModal">New Time Card
             </button>
 
+            <!-- Modal dialog which allows user to create new Timecards -->
             <div class="modal fade" id="newTimecardModal" tabindex="-1" role="dialog" aria-labelledby="modalTitle"
                  aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -150,6 +156,7 @@
             </div>
           </div>
 
+          <!-- Section which displays details of selected Timecards -->
           <div class="col-lg-8">
             <h3>Timecard Details</h3>
             <div class="item-details scrollable-cards">
