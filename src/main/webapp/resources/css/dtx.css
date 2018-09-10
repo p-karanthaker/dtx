@@ -50,7 +50,7 @@ body {
   color: #fff
 }
 
-.btn-group>button:last-of-type {
+.timecard-btn-group>button:last-of-type {
   border-right: none;
 }
 

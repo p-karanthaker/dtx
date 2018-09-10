@@ -198,6 +198,7 @@ $('#newTimecardModal').on('hide.bs.modal', function () {
 
 /**
  * Performs live updates to total time booked as user enters time into a new Timecard.
+ * Performs live updates to total time booked as user enters time into a new Timecard.
  */
 $('#newTimeEntry').on('change', 'input', function () {
   var hours = calculateHours($('#newTimeEntry td'), "");
@@ -237,7 +238,7 @@ function getTimecards(period) {
               '<b>Task: </b>' + entry.project.task + '<br/>' +
               '<b>Quantity: </b>' + entry.quantity + ' hours<br/>' +
               '</div>' +
-              '<div class="btn-group d-flex" role="group" aria-label="Timecard Actions">' +
+              '<div class="btn-group d-flex timecard-btn-group" role="group" aria-label="Timecard Actions">' +
               '<button class="btn btn-sm btn-outline-primary time-button w-100" data-timecard-id="' + entry.id + '" data-action="details">Details</button>' +
               '<button class="btn btn-sm btn-outline-primary time-button w-100" data-timecard-id="' + entry.id + '" data-action="edit">Edit</button>' +
               '<button class="btn btn-sm btn-outline-primary time-button w-100" data-timecard-id="' + entry.id + '" data-action="delete">Delete</button>' +
